@@ -1,0 +1,195 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html class="no-js" lang="fa">
+<head>
+     <meta charset="utf-8">
+     <title>{% block title %}{% endblock title %}</title>
+     <meta name="apple-mobile-web-app-capable" content="yes">
+     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+     <meta name="HandheldFriendly" content="true" />
+     <meta name="apple-touch-fullscreen" content="yes" />
+     <!-- All Animations CSS -->
+     <link href="{% static 'css/animate.css' %}" rel="stylesheet" type="text/css">
+     <link href="{% static 'css/animate-rtl.css' %}" rel="stylesheet" type="text/css">
+     <!-- Image Lightbox CSS-->
+     <link rel="stylesheet" href="{% static 'css/imagelightbox.css' %}" type="text/css" media="screen">
+     <link rel="stylesheet" href="{% static 'css/imagelightbox-rtl.css' %}" type="text/css" media="screen">
+     <!-- Theme styles and Menu styles -->
+     <link href="{% static 'css/style.css' %}" rel="stylesheet" type="text/css">
+     <link href="{% static 'css/style-rtl.css' %}" rel="stylesheet" type="text/css">
+     <link href="{% static 'css/mainmenu.css' %}" rel="stylesheet" type="text/css">
+     <link href="{% static 'css/mainmenu-rtl.css' %}" rel="stylesheet" type="text/css">
+     <!-- Call Fontawsome Icon Font from a CDN -->
+     <link href="http://netdna.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css" rel="stylesheet">
+     <!--Pace Page Loader -->
+     <link rel="stylesheet" href="{% static 'js/pace-0.5.1/themes/pace-theme-minimal.css' %}" type="text/css" media="screen" />
+     <!--FlexSlider -->
+     <link rel="stylesheet" href="{% static 'js/woothemes-FlexSlider-06b12f8/flexslider.css' %}" type="text/css" media="screen">
+     <!--Isotope Plugin -->
+     <link rel="stylesheet" href="{% static 'js/isotope/css/style.css' %}" type="text/css" media="screen">
+     <!--Simple Text Rotator -->
+     <link href="{% static 'css/simpletextrotator.css' %}" rel="stylesheet" type="text/css">
+     <!--Style Switcher, You propably want to remove this!-->
+     <link href="{% static 'css/_style_switcher.css' %}" rel="stylesheet" type="text/css">
+     <!--Modernizer Custom -->
+     <script type="text/javascript" src="{% static 'js/modernizr.custom.48287.js' %}"></script>
+     <!-- Fav and touch icons -->
+     <link rel="apple-touch-icon-precomposed" sizes="114x114" href="{% static 'apple-touch-icon-114x114-precomposed.png' %}">
+     <link rel="apple-touch-icon-precomposed" sizes="72x72" href="{% static 'apple-touch-icon-72x72-precomposed.png' %}">
+     <link rel="apple-touch-icon-precomposed" href="{% static 'apple-touch-fa-57x57-precomposed.html' %}">
+     <link rel="shortcut icon" href="{% static 'favicon.png' %}">
+</head>
+<body class="sticky_header">
+     <div class="overflow_wrapper">
+     <header class="centered">
+          <div class="container">
+               <div class="logo"><a class="brand" href="index.html"> <img src="{% static 'images/cleanstart_logo.png' %}" alt="optional logo"> <span class="logo_title">گالری</span></a></div>
+               <div id="mainmenu" class="menu_container">
+                    <label class="mobile_collapser">منو</label>
+                    <!-- Mobile menu title -->
+                    <ul>
+                         <li {% if request.get_full_path == '/' %} class="active" {% endif %}><a href="{% url 'home:home' %}">خانه</a></li>
+                         <li {% if request.get_full_path == '/services/' %} class="active" {% endif %}><a href="{% url 'services:services' %}">خدمات</a></li>
+                         <li {% if request.get_full_path == '/projects/' %} class="active" {% endif %}><a href="{% url 'projects:projects' %}">پروژه‌ها</a></li>                                                                           
+                         {% if request.user.is_authenticated %}
+                         <li {% if request.get_full_path == '/account/' %} class="active" {% endif %}><a href="{% url 'account:dashboard' %}">داشبورد</a></li>
+                         <li><a href="{% url 'account:logout' %}">خروج از حساب کاربری</a></li>
+                         {% else %}
+                         <li {% if request.get_full_path == '/account/login' %} class="active" {% endif %}><a href="{% url 'account:login' %}">ورود به حساب کاربری</a></li>
+                         {% endif %}
+                         <li {% if request.get_full_path == '/blog/' %} class="active" {% endif %}><a href="{% url 'blog:post_list' %}">وبلاگ</a>
+                         <li {% if request.get_full_path == '/contact/' %} class="active" {% endif %}><a href="{% url 'contact:contact_us' %}">تماس با ما</a></li>
+                         <li {% if request.get_full_path == '/about/' %} class="active" {% endif %}><a href="{% url 'about:about_us' %}">درباره ما</a></li>
+                    </ul>
+               </div>
+               <div class="triangle-up-left"></div>
+               <div class="triangle-up-right"></div>
+          </div>
+     </header>
+     
+     {% block content %}
+     
+     
+     
+     
+     
+     
+     
+     {% endblock content %}
+
+     {% if messages %}
+
+     <ul class="container" dir="rtl">
+          {% for message in messages %}
+          <li class="{{ message.tags }}">
+               {{ message|safe }}
+          </li>
+          {% endfor %}
+     </ul>
+
+     {% endif %}
+
+     {% block down %}
+     <section class="twitter_feed_wrapper skincolored_section">
+          <div class="container">
+               <div class="row">
+                    <div class="twitter_feed_icon wow fadeInDown"><a href="https://twitter.com/PlethoraThemes"><i class="fa fa-twitter"></i></a></div>
+                    <div id="twitter_flexslider" class="flexslider">
+                         <ul class="slides">
+                              <li class="item">
+                                   <blockquote>
+                                        <p> لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ و با استفاده از طراحان گرافیک است.<a href="http://mihanwebmaster.com/">میهن وبمستر</a></p>
+                                   </blockquote>
+                              </li>
+                              <li class="item">
+                                   <blockquote>
+                                        <p> لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ و با استفاده از طراحان گرافیک است.<a href="http://mihanwebmaster.com/">میهن وبمستر</a></p>
+                                   </blockquote>
+                              </li>
+                              <li class="item">
+                                   <blockquote>
+                                        <p> لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ و با استفاده از طراحان گرافیک است.<a href="http://mihanwebmaster.com/">میهن وبمستر</a></p>
+                                   </blockquote>
+                              </li>
+                         </ul>
+                    </div>
+               </div>
+          </div>
+     </section>
+     {% endblock down %}
+     <footer>
+          <section class="footer_teasers_wrapper dark_section">
+               <div class="container triangles-of-section">
+                    <div class="triangle-up-left"></div>
+                    <div class="square-left"></div>
+                    <div class="triangle-up-right"></div>
+                    <div class="square-right"></div>
+               </div>
+               <div class="container">
+                    <div class="row">
+                         <div class="footer_teaser pl_about_us_widget col-sm-4 col-md-4">
+                              <h3>در تماس باشید</h3>
+                              <p>میهن وبمستر <small>منابع طراحی وب و گرافیک</small><br>
+                                  ایران تهران خ شهید مطهری برج آزادی پ 007</p>
+                              <p><i class="fa fa-envelope"></i> contact@example.com</p>
+                              <p><i class="fa fa-phone"></i> (+98) 265-9987</p>
+                              <div class="footer_social">
+                                   <div class="social_wrapper"><a href="https://www.facebook.com/mihanwebmaster"><i class="fa fa-facebook"></i></a> <a href="#"><i class="fa fa-youtube"></i></a> <a href="#googleplus"><i class="fa fa-google-plus"></i></a></div>
+                              </div>
+                         </div>
+                         <div class="footer_teaser pl_latest_news_widget col-sm-4 col-md-4">
+                              <h3>آخرین اخبار</h3>
+                              <ul class="media-list">
+                                   <li class="media"> <a href="#" class="media-photo" style="background-image:url({% static 'images/portfolio/t5.jpg' %})"></a> <a href="#" class="media-date">19<span>مرداد</span></a>
+                                        <h5 class="media-heading"><a href="#">عنوان آخرین خبر در این محل نوشته می شود...</a></h5>
+                                        <p>لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ و با استفاده از طراحان گرافیک است...</p>
+                                   </li>
+                                   <li class="media"> <a href="#" class="media-photo" style="background-image:url({% static 'images/portfolio/t4.jpg' %})"></a> <a href="#" class="media-date">18<span>تیر</span></a>
+                                        <h5 class="media-heading"><a href="#">یک عنوان دیگر از خبر...</a></h5>
+                                        <p>لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ و با استفاده از طراحان گرافیک است...</p>
+                                   </li>
+                              </ul>
+                         </div>
+                         <div class="footer_teaser pl_flickr_widget col-sm-4 col-md-4" id="latest-flickr-images">
+                              <h3>فلیکرفید</h3>
+                              <ul>
+                              </ul>
+                         </div>
+                    </div>
+               </div>
+          </section>
+          <div class="copyright">
+               <div class="container">
+                    <div class="row">
+                         <div class="col-sm-4 col-md-4">کپی رایت  ©2014 تمامی حقوق محفوظ است </div>
+                         <div class="col-sm-4 col-md-4"></div>
+                         <div class="text-right col-sm-4 col-md-4">فارسی شده توسط <a href="http://mihanwebmaster.com/">میهن وبمستر</a> </div>
+                    </div>
+               </div>
+          </div>
+     </footer>
+     </div>
+     <script src="{% static 'js/jquery-1.10.2.min.js' %}"></script>
+     <script src="{% static 'twitter-bootstrap/js/bootstrap.min.js' %}" type="text/javascript"></script>
+     <!--Pace Page Loader -->
+     <script src="{% static 'js/pace-0.5.1/pace.min.js' %}"></script>
+     <!--FlexSlider -->
+     <script src="{% static 'js/woothemes-FlexSlider-06b12f8/jquery.flexslider-min.js' %}"></script>
+     <!--Isotope Plugin -->
+     <script src="{% static 'js/isotope/jquery.isotope.min.js' %}" type="text/javascript"></script>
+     <!--To-Top Button Plugin -->
+     <script type="text/javascript" src="{% static 'js/jquery.ui.totop.js' %}"></script>
+     <!--Easing animations Plugin -->
+     <script type="text/javascript" src="{% static 'js/easing.js' %}"></script>
+     <!--WOW Reveal on scroll Plugin -->
+     <script type="text/javascript" src="{% static 'js/wow.min.js' %}"></script>
+     <!--Simple Text Rotator -->
+     <script type="text/javascript" src="{% static 'js/jquery.simple-text-rotator.js' %}"></script>
+     <!--The Theme Required Js -->
+     <script type="text/javascript" src="{% static 'js/cleanstart_theme.js' %}"></script>
+     <!--To collapse the menu -->
+     <script type="text/javascript" src="{% static 'js/collapser.js' %}"></script>
+     </div>
+</body>
+</html>

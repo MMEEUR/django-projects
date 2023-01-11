@@ -1,0 +1,35 @@
+{% extends 'base.html' %}
+
+{% block title %}ثبت نام در گالری{% endblock title %}
+{% block content %}
+
+<div class="full_page_photo no_photo">
+    <div class="hgroup">
+         <div class="hgroup_title animated bounceInUp skincolored">
+              <div class="container">
+                   <h1><strong>حساب کاربری</strong></h1>
+              </div>
+         </div>
+         <div class="hgroup_subtitle animated bounceInUp">
+              <div class="container">
+                   <p>شما با موفقیت ساخته شد</p>
+              </div>
+         </div>
+    </div>
+</div>
+<div class="main">
+    <div class="container triangles-of-section">
+         <div class="triangle-up-left"></div>
+         <div class="square-left"></div>
+         <div class="triangle-up-right"></div>
+         <div class="square-right"></div>
+    </div>
+    <section class="call_to_action four-o-four">
+        <div class="container"> <i class="fa fa-user"></i>
+            <h4>{{ new_user.first_name }} خوش آمدید</h4>
+            <p>شما می‌توانید وارد حساب کاربری خود شوید</p>
+            <a id="submit_btn" class="btn btn-primary" name="submit" href="{% url 'account:login' %}">ورود</a>
+        </div>
+   </section>
+
+{% endblock content %}

@@ -1,0 +1,61 @@
+{% extends 'base.html' %}
+
+{% block title %}پروژه های گالری{% endblock title %}
+
+{% block content %}
+
+<div class="full_page_photo no_photo">
+    <div class="hgroup">
+         <div class="hgroup_title animated bounceInUp skincolored">
+              <div class="container">
+                   <h1 class="">پروژه‌ها</h1>
+              </div>
+         </div>
+         <div class="hgroup_subtitle animated bounceInUp ">
+              <div class="container">
+                   <p>این پروژه‌ها می توانند تبلیغ خوبی برای ما باشند!</p>
+              </div>
+         </div>
+    </div>
+</div>
+<div class="main">
+    <div class="container triangles-of-section">
+         <div class="triangle-up-left"></div>
+         <div class="square-left"></div>
+         <div class="triangle-up-right"></div>
+         <div class="square-right"></div>
+    </div>
+    <section class="portfolio_strict">
+         <div class="container">
+             <ul class="portfolio_filters">
+                 <li><a href="#" data-filter="*">همه</a></li>
+                 <li><a href="#" data-filter=".cat_artists">هنری</a></li>
+                 <li><a href="#" data-filter=".cat_people">مردم</a></li>
+                 <li><a href="#" data-filter=".cat_travel">سفر</a></li>
+                 <li><a href="#" data-filter=".cat_poetic">شاعرانه</a></li>
+                </ul>
+                <div class="row isotope_portfolio_container">
+                    {% if projects %}
+                    {% for project in projects %}
+                    <div class="cat_{{ project.grouping }} col-xs-12 col-sm-6 {% cycle 'col-md-4 col-lg-4' 'col-md-4 col-lg-4' 'col-md-4 col-lg-4' 'col-md-4 col-lg-4' 'col-md-8 col-lg-8' %}">
+                        <div class="portfolio_item"> <a href="{{ project.get_absolute_url }}">
+                             <figure style="background-image:url({{ project.image1.url }})">
+                                  <figcaption>
+                                       <div class="portfolio_description">
+                                            <h3>{{ project.title }}</h3>
+                                            <span class="cross"></span>
+                                            <p>{{ project.get_grouping_display }}</p>
+                                       </div>
+                                  </figcaption>
+                             </figure>
+                             </a> </div>
+                    </div>
+                    {% endfor %}
+                    {% else %}
+                    <h3 style="text-align: center;">هیچ پروژه‌ای برای نمایش وجود ندارد</h3>
+                    {% endif %}
+              </div>
+         </div>
+    </section>
+
+{% endblock content %}

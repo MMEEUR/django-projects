@@ -1,0 +1,6 @@
+{% for post in latest_posts %}
+<li class="media"> <a href="{{ post.get_absolute_url }}" class="media-photo" style="background-image:url({{ post.picture.url }})"></a> <a href="{{ post.get_absolute_url }}" class="media-date">19<span>مرداد</span></a>
+     <h5 class="media-heading"><a href="{{ post.get_absolute_url }}">{{ post.title }}</a></h5>
+     <p>{{ post.body|truncatewords:20|linebreaks }}</p>
+</li>
+{% endfor %} 

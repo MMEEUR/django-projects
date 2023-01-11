@@ -1,0 +1,82 @@
+{% extends 'base.html' %}
+{% load widget_tweaks %}
+
+{% block title %}تماس با ما{% endblock title %}
+{% block content %}
+
+<div class="full_page_photo no_photo">
+    <div id="map"></div>
+    <div class="container">
+        <div class="hgroup">
+            <div class="hgroup_title animated bounceInUp skincolored">
+                <div class="container">
+                    <h1>ارتباط با ما</h1>
+                </div>
+            </div>
+            <div class="hgroup_subtitle animated bounceInUp">
+                <div class="container">
+                    <p>پیام خود را برای ما ارسال کنید</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="main">
+    <div class="container triangles-of-section">
+        <div class="triangle-up-left"></div>
+        <div class="square-left"></div>
+        <div class="triangle-up-right"></div>
+        <div class="square-right"></div>
+    </div>
+    <div class="container">
+        <section>
+            <div class="row">
+                <div class="office_address col-sm-6 col-md-4">
+                    <div class="team_member"> <img src="/contact/photos/contact-us.png"  alt="logo">
+                        <h5>گالری اعتماد</h5>
+                        <small>گالری فروش پروژه های عکاسی و گرافیکی</small><br>
+                        <address>
+                        ایران مشهد
+                        </address>
+                        <abbr title="Phone">تلفن:</abbr> (98) 2152-5514<br>
+                        <abbr title="Phone">ایمیل:</abbr> <a href="mailto:#">will@wsvincent.com</a> 
+                    </div>
+                </div>
+                <div class="contact_form col-sm-6 col-md-8">
+                    <form name="contact_form" id="contact_form" method="post">
+                        {% if form.errors %}
+                        <p class="text-danger">اطلاعات وارد شده صحیح نیست</p>
+                        {% endif %}
+                        <div class="row">
+                            <div class="col-sm-6 col-md-6">
+                                <label>نام</label>
+                                {{ form.name|attr:"class:form-control"|attr:"type:text" }}
+                            </div>
+                            <div class="col-sm-6 col-md-6">
+                                <label>ایمیل</label>
+                                {{ form.email|attr:"class:form-control"|attr:"type:text" }}
+                            </div>
+                            </div>
+                        <div class="row">
+                            <div class="col-sm-12 col-md-12">
+                                <label>موضوع</label>
+                                {{ form.subject|attr:"class:form-control"|attr:"type:text" }}
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-sm-12 col-md-12" dir="rtl">
+                                <label>پیام</label>
+                                {{ form.message|attr:"class:form-control"|attr:"type:text" }}
+                            </div>
+                            <div class="col-sm-12 col-md-12"><br/>
+                                <button type="submit" class="btn btn-primary">ثبت پیام</button> <span id="notice" class="alert alert-warning alert-dismissable hidden" style="margin-left:20px;"></span>
+                            </div>
+                        </div>
+                        {% csrf_token %}
+                    </form>
+                </div>
+            </div>
+        </section>
+    </div>
+
+{% endblock content %}

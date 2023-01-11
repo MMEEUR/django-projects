@@ -1,0 +1,52 @@
+{% extends 'base.html' %}
+{% load widget_tweaks %}
+
+{% block title %}ویرایش پروفایل{% endblock title %}
+{% block content %}
+
+ <div class="full_page_photo no_photo">
+    <div class="hgroup">
+         <div class="hgroup_title animated bounceInUp skincolored">
+              <div class="container">
+                   <h1><strong>ویرایش پروفایل</strong></h1>
+              </div>
+         </div>
+         <div class="hgroup_subtitle animated bounceInUp">
+              <div class="container">
+                   <p>اطلاعات کاربری خود را وارد کنید</p>
+              </div>
+         </div>
+    </div>
+</div>
+<div class="main">
+    <div class="container triangles-of-section">
+         <div class="triangle-up-left"></div>
+         <div class="square-left"></div>
+         <div class="triangle-up-right"></div>
+         <div class="square-right"></div>
+    </div>
+    <section class="call_to_action four-o-four">
+        <div class="container"> <i class="fa fa-user"></i>
+            <h4>تغییر پروفایل</h4><br>
+            <div class="col-sm-6 col-md-6"></div>
+            <div class="signin" dir="rtl">
+                <div class="row">
+                    <div class="col-lg-2"></div>
+                    <div class="form col-lg-8" dir="rtl">
+                        <form method="post" enctype="multipart/form-data">
+                            {{ user_form.first_name|attr:"placeholder:نام"|attr:"class:form-control"|attr:"type:text" }}
+                            {{ user_form.last_name|attr:"placeholder:نام خانوادگی"|attr:"class:form-control"|attr:"type:text" }}
+                            {{ user_form.email|attr:"placeholder:ایمیل"|attr:"class:form-control"|attr:"type:text" }}
+                            {{ profile_form.date_of_birth|attr:"placeholder:تاریخ تولد"|attr:"class:form-control"|attr:"type:text" }}
+                            {{ profile_form.photo }}
+                            <button type="submit" class="btn btn-primary">ذخیره</button>
+                            {% csrf_token %}
+                        </form>
+                    </div>
+                    <div class="col-lg-2"></div>
+                </div>
+            </div>
+        </div>
+   </section> 
+
+{% endblock content %}

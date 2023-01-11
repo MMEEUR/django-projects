@@ -1,0 +1,115 @@
+{% extends 'base.html' %}
+{% load widget_tweaks %}
+
+{% block title %}
+{{ post.title }}
+{% endblock title %}
+{% block content %}
+<div class="full_page_photo" style="background-image: url({{ post.picture.url }});"> </div>
+<div class="main">
+     <div class="container triangles-of-section">
+          <div class="triangle-up-left"></div>
+          <div class="square-left"></div>
+          <div class="triangle-up-right"></div>
+          <div class="square-right"></div>
+     </div>
+     <section class="with_right_sidebar">
+          <div class="container">
+               <h2 class="section_header elegant">{{ post.title }}
+                    <small>
+                    <i class="fa-time"></i> منتشر شده در {{ post.publish }} توسط {{ post.author }}<a href="#post_comments"><i class="fa-comments-alt"></i>--- نظر {{ comments.count }}</a>
+                    </small>
+               </h2>
+               <div class="row">
+                    <div id="leftcol" class="col-sm-8 col-md-8">
+                         <article class="post">
+                              <div class="post_content">
+                                   <p></p>
+                                   <p>{{ post.body }}</p>
+                                   <blockquote>
+                                        <p>{{ post.bolded_text }}</p>
+                                   </blockquote>
+                                   <p>{{ post.body }}</p>
+                              </div>
+                         </article>
+                         <div id="post_comments">
+                              <h4>نظرات</h4>
+                              <div class="comment">
+                                   {% for comment in comments %}
+                                   <div class="row">
+                                        <figure class="col-sm-2 col-md-2"> <img width="90" height="90" class="img-circle" src="{{ comment.profile.photo.url }}" alt="عکس کاربر"> </figure>
+                                        <div class="col-sm-10 col-md-10">
+                                             <div class="comment_name">{{ comment.profile }}<a class="reply" href="#">&nbsp;</a> </div>
+                                             <div class="comment_date"><i class="fa-time"></i>{{ comment.created }}</div>
+                                             <div class="the_comment">
+                                                  <p>{{ comment.body|linebreaks }}</p>
+                                             </div>
+                                        </div>
+                                   </div>
+                                   {% empty %}
+                                        <h5>هیچ نظری وجود ندارد</h5>
+                                   {% endfor %}
+                              </div>
+                         </div>
+                         {% if request.user.is_authenticated %}
+                         <div class="new_comment">
+                              {% if inactive_comments %}
+                                   <h4>نظر شما با موفقیت ثبت شده و در حال بررسی است.</h4>                                                             
+                              {% else %}     
+                              <h4>نظر خود را اضافه کنید</h4></br>
+                              <form method="post">                               
+                                   <div class="row" dir="rtl">
+                                        <div class="col-sm-12 col-md-8">
+                                             {{ comment_form.body|attr:"class:form-control"|attr:"type:text" }}
+                                        </div>
+                                   </div>
+                                   {% csrf_token %} 
+                                   <div class="row"><br/>
+                                        <div class="col-sm-12 col-md-8"> <input type="submit" value="ارسال نظر" class="btn send btn-primary" href="#"></input> </div>
+                                   </div>                                  
+                              </form>          
+                              {% endif %}
+                         </div>
+                         {% else %}
+                         <p>برای انتشار دیدگاه خود <a href="{% url 'account:login' %}">وارد پروفایل کاربری</a> خود شوید یا در سایت <a href="{% url 'account:register' %}">ثبت نام</a> کنید.</p>
+                         {% endif %}
+                    </div>
+                    <div id="sidebar" class="col-sm-4 col-md-4">
+                         <aside class="widget">
+                              <h4>{{ post.title }}</h4>
+                              <p>{{ post.bolded_text }}</p>
+                         </aside>
+                         <aside class="widget ads clearfix">
+                              <h4>تبلیغات</h4>
+                              <a href="#"><img src="http://placehold.it/110" alt=""></a> <a href="#"><img src="http://placehold.it/110" alt=""></a> <a href="#"><img src="http://placehold.it/110" alt=""></a> </aside>
+                         <aside class="widget">
+                              <h4>تب‌ها</h4>
+                              <ul class="nav nav-tabs" id="myTab">
+                                   <li class="active"><a data-toggle="tab" href="#recent">مشابه</a></li>
+                                   <li class=""><a data-toggle="tab" href="#tags">برچسب‌ها</a></li>
+                              </ul>
+                              <div class="tab-content" id="myTabContent">
+                                   <div id="recent" class="tab-pane fade active in">
+                                        <ul class="media-list">
+                                             {% for post in similar_posts %}
+                                             <li class="media"> <a href="{{ post.get_absolote_url }}" class="media-photo" style="background-image:url({{ post.picture.url }})"></a> <a href="{{ post.get_absolote_url }}" class="media-date">19<span>مرداد</span></a>
+                                                  <h5 class="media-heading"><a href="{{ post.get_absolote_url }}">{{ post.title }}</a></h5>
+                                                  <p>{{ post.body|truncatewords:20|linebreaks }}</p>
+                                             </li>
+                                             {% empty %}
+                                                  <h5>پست مشابهی وجود ندارد</h5>
+                                             {% endfor %}
+                                        </ul>
+                                   </div>
+                                   <div id="tags" class="tab-pane fade">
+                                        {% for tag in tagsList %}                                        
+                                             <a class="label label-{% cycle 'default' 'primary' 'success' 'warning' 'danger' 'info' %}" {% for tagslug in tags %} href="{% url 'blog:post_list_by_tag' tagslug.slug %}" {% endfor %}>{{ tag }}</a>                                                           
+                                        {% endfor %}
+                                   </div>
+                              </div>
+                         </aside>
+                    </div>
+               </div>
+          </div>
+     </section>
+{% endblock content %}

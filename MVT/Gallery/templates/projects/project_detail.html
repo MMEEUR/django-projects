@@ -1,0 +1,148 @@
+{%  extends 'base.html' %}
+
+{% block title %}{{ project.title }}{% endblock title %}
+
+{% block content %}
+
+<div class="full_page_photo no_photo">
+    <div class="hgroup">
+         <div class="hgroup_title animated bounceInUp skincolored">
+              <div class="container">
+                   <h1 class="">{{ project.title }}</h1>
+              </div>
+         </div>
+         <div class="hgroup_subtitle animated bounceInUp ">
+              <div class="container">
+                   <p>{{ project.description|truncatewords:20|linebreaks }}</p>
+              </div>
+         </div>
+    </div>
+</div>
+<div class="main">
+    <div class="container triangles-of-section">
+         <div class="triangle-up-left"></div>
+         <div class="square-left"></div>
+         <div class="triangle-up-right"></div>
+         <div class="square-right"></div>
+    </div>
+    <section class="portfolio_slider_wrapper">
+         <div class="container">
+              <div class="row">
+                   <div class="col-sm-12 col-md-8">
+                        <div class="portfolio_slider_wrapper">
+                             <div class="flexslider" id="portfolio_slider">
+                                  <ul class="slides">
+                                       <li class="item" data-thumb="{{ project.image1.url }}" style="background-image: url({{ project.image1.url }})">
+                                            <div class="container"> <a href="{{ project.image1.url }}" class="lightbox_portfolio" title="title on a"></a>
+                                                 <div class="carousel-caption">
+                                                      <p class="lead">{{ project.title }}</p>
+                                                 </div>
+                                            </div>
+                                       </li>
+                                       <li class="item" data-thumb="{{ project.image2.url }}" style="background-image: url({{ project.image2.url }})">
+                                            <div class="container"> <a href="{{ project.image2.url }}" class="lightbox_portfolio" title="title on a"></a>
+                                                 <div class="carousel-caption">
+                                                      <p class="lead">{{ project.title }}</p>
+                                                 </div>
+                                            </div>
+                                       </li>
+                                       <li class="item" data-thumb="{{ project.image3.url }}" style="background-image: url({{ project.image3.url }})">
+                                            <div class="container"> <a href="{{ project.image3.url }}" class="lightbox_portfolio" title="title on a"></a>
+                                                 <div class="carousel-caption">
+                                                      <p class="lead">{{ project.title }}</p>
+                                                 </div>
+                                            </div>
+                                       </li>
+                                       <li class="item" data-thumb="{{ project.image4.url }}" style="background-image: url({{ project.image4.url }})">
+                                            <div class="container"> <a href="{{ project.image4.url }}" class="lightbox_portfolio" title="title on a"></a>
+                                                 <div class="carousel-caption">
+                                                      <p class="lead">{{ project.title }}</p>
+                                                 </div>
+                                            </div>
+                                       </li>
+                                  </ul>
+                             </div>
+                             <div id="carousel" class="flexslider">
+                                  <ul class="slides">
+                                       <li> <img src="{{ project.image1.url }}" alt=""> </li>
+                                       <li> <img src="{{ project.image2.url }}" alt=""> </li>
+                                       <li> <img src="{{ project.image3.url }}" alt=""> </li>
+                                       <li> <img src="{{ project.image4.url }}" alt=""> </li>
+                                  </ul>
+                             </div>
+                        </div>
+                   </div>
+                   <div class="col-sm-12 col-md-4">
+                        <div class="portfolio_details">
+                             <h2 class="section_header">درباره این پروژه</h2>
+                             <p>{{ project.description }}</p>
+                             <br>
+                             <br>
+                             <div>
+                                 <p><strong>تاریخ:</strong>{{ project.created }}</p>
+                             <p><strong>مشتری:</strong>{{ project.customer }}</p>
+                             <p><strong>دسته بندی:</strong>{{ project.get_grouping_display }}</p>
+                             <p><strong>مکان:</strong>{{ project.place }}</p>
+                             <p><strong>امتیاز:</strong><span class="rating r9"></span></p>
+                             </div>
+                             <br>
+                             <br>
+                             <a href="#" class="btn btn-danger center-block ">مشاهده سایت پروژه</a> </div>
+                   </div>
+              </div>
+              <ul class="pager">
+                   <!--<li class="next"><a href="portfolio_item.html">← قدیمی تر</a></li>
+                   <li class="previous disabled"><a href="#">جدیدتر →</a></li>-->
+              </ul>
+         </div>
+    </section>
+      <section class="portfolio_teasers_wrapper">
+         <div class="container">
+              <h2 class="elegant centered section_header">پروژه های مرتبط<small></small></h2>
+              <div class="portfolio_strict row">
+                    {% for project in similar_projects %}
+                    <div class="col-sm-4 col-md-4">
+                        <div class="portfolio_item"> <a href="{{ project.get_absolute_url }}">
+                            <figure style="background-image:url({{ project.image1.url }})">
+                                <figcaption>
+                                    <div class="portfolio_description">
+                                        <h3>{{ project.title }}</h3>
+                                        <span class="cross"></span>
+                                        <p>{{ project.get_grouping_display }}</p>
+                                    </div>
+                                </figcaption>
+                            </figure>
+                            </a> </div>
+                    </div>
+                   {% endfor %}
+                   {% comment %} <div class="col-sm-4 col-md-4">
+                        <div class="portfolio_item"> <a href="portfolio_item.html">
+                             <figure style="background-image:url(images/portfolio/t5.jpg)">
+                                  <figcaption>
+                                      <div class="portfolio_description">
+                                            <h3>پروژه میهن وبمستر</h3>
+                                            <span class="cross"></span>
+                                            <p>مردم</p>
+                                       </div>
+                                  </figcaption>
+                             </figure>
+                             </a> </div>
+                   </div>
+                   <div class="col-sm-4 col-md-4">
+                        <div class="portfolio_item"> <a href="portfolio_item.html">
+                             <figure style="background-image:url(images/portfolio/p3.jpg)">
+                                  <figcaption>
+                                       <div class="portfolio_description">
+                                            <h3>پروژه میهن وبمستر</h3>
+                                            <span class="cross"></span>
+                                            <p>مردم</p>
+                                       </div>
+                                  </figcaption>
+                             </figure>
+                             </a> </div>
+                   </div> {% endcomment %}
+              </div>
+         </div>
+    </section>
+
+{% endblock content %}

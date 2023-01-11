@@ -1,0 +1,145 @@
+{% extends 'base.html' %}
+
+{% block title %}خدمات ما{% endblock title %}
+{% block content %}
+
+<div class="full_page_photo" style="background-image: url(/services/photos/services.jpg);">
+    <div class="hgroup">
+         <div class="hgroup_title animated bounceInUp">
+              <div class="container">
+                   <h1>خدمات</h1>
+              </div>
+         </div>
+         <div class="hgroup_subtitle animated bounceInUp skincolored">
+              <div class="container">
+                   <p>ما برای مشکلات شما ایده داریم! </p>
+              </div>
+         </div>
+    </div>
+</div>
+<div class="main">
+    <div class="container triangles-of-section">
+         <div class="triangle-up-left"></div>
+         <div class="square-left"></div>
+         <div class="triangle-up-right"></div>
+         <div class="square-right"></div>
+    </div>
+    <section class="horizontal_teaser">
+         <div class="container">
+              <div class="row">
+                   <div class="col-sm-12 col-md-4 horizontal_teaser_left">
+                        <h3>به دورنمای ما اعتماد کنید!</h3>
+                        <p>لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ و با استفاده از طراحان گرافیک است. چاپگرها و متون بلکه روزنامه و مجله در ستون و سطرآنچنان که لازم است و برای شرایط فعلی تکنولوژی مورد نیاز و کاربردهای متنوع با هدف بهبود ابزارهای کاربردی می باشد. </p>
+                        <p>لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ و با استفاده از طراحان گرافیک است. چاپگرها و متون بلکه روزنامه و مجله در ستون و سطرآنچنان که لازم است و برای شرایط فعلی تکنولوژی مورد نیاز و کاربردهای متنوع با هدف بهبود ابزارهای کاربردی می باشد. </p>
+                   </div>
+                   <div class="col-sm-12 col-md-8 horizontal_teaser_right">
+                        <!--<figure style="background-image:url(images/portfolio/t4.jpg)"> </figure>-->
+                        <div class="twentytwenty-container"> <img src="/services/photos/img_after.jpg" alt="after" /> </div>
+                   </div>
+              </div>
+         </div>
+    </section>
+    <section class="services_teasers dark_section">
+         <div class="container triangles-of-section">
+              <div class="triangle-up-left"></div>
+              <div class="square-left"></div>
+              <div class="triangle-up-right"></div>
+              <div class="square-right"></div>
+         </div>
+         <div class="container">
+              <h2 class="section_header fancy centered">خدماتی که ارائه می دهیم<small>بیش از نیازهای شماست</small></h2>
+              <div class="row">
+                   <div class="col-sm-4 col-md-4">
+                        <div class="service_teaser vertical">
+                             <div class="service_photo">
+                                  <figure style="background-image:url(/services/photos/serv_4.jpg)"></figure>
+                             </div>
+                             <div class="service_details">
+                                  <h2>طراحی</h2>
+                                  <p>لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ و با استفاده از طراحان گرافیک است. لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ و با استفاده از طراحان گرافیک است. </p>
+                             </div>
+                        </div>
+                   </div>
+                   <div class="col-sm-4 col-md-4">
+                        <div class="service_teaser vertical">
+                             <div class="service_photo">
+                                  <figure style="background-image:url(/services/photos/serv_5.jpg)"></figure>
+                             </div>
+                             <div class="service_details">
+                                  <h2>توسعه</h2>
+                                  <p>لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ و با استفاده از طراحان گرافیک است. لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ و با استفاده از طراحان گرافیک است. </p>
+                                  <a class="btn btn-primary" href="{% url 'contact:contact_us' %}">همین حالا تماس بگیرید</a> </div>
+                        </div>
+                   </div>
+                   <div class="col-sm-4 col-md-4">
+                        <div class="service_teaser vertical">
+                             <div class="service_photo">
+                                  <figure style="background-image:url(/services/photos/serv_1.jpg)"></figure>
+                             </div>
+                             <div class="service_details">
+                                  <h2>پشتیبانی</h2>
+                                  <p>لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ و با استفاده از طراحان گرافیک است. لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ و با استفاده از طراحان گرافیک است. </p>
+                             </div>
+                        </div>
+                   </div>
+              </div>
+         </div>
+    </section>
+    <section class="pricing_wrapper">
+         <div class="container triangles-of-section">
+              <div class="triangle-up-left"></div>
+              <div class="square-left"></div>
+              <div class="triangle-up-right"></div>
+              <div class="square-right"></div>
+         </div>
+         <div class="container">
+              <h2 class="section_header fancy centered">پلن های ارائه خدمات<small>ما همیشه مطابق نیاز شما پلن داریم</small></h2>
+              <div class="row">
+                   <div class="col-sm-4 col-md-4">
+                        <div class="pricing_plan wow fadeInUp">
+                             <h3>پلن کوچک <small>برای شروع بکار</small></h3>
+                             <div class="the_price"><span>هزارتومان</span>150</div>
+                             <div class="the_offerings">
+                                  <p> <strong>1</strong> طراحی قالب </p>
+                                  <p> <strong>2</strong> فرم تماس </p>
+                                  <p> <strong>5</strong> صفحه HTML </p>
+                             </div>
+                             <a href="#" class="btn btn-primary">انتخاب کنید</a> </div>
+                   </div>
+                   <div class="col-sm-4 col-md-4">
+                        <div class="pricing_plan special wow fadeInUp">
+                             <h3>پلن متوسط <small>پلنی که باید انتخاب کنید</small></h3>
+                             <div class="the_price"><span>هزار تومان</span>250</div>
+                             <div class="the_offerings">
+                                    <p> <strong>1</strong> طراحی قالب </p>
+                                  <p> <strong>2</strong> فرم تماس </p>
+                                  <p> <strong>5</strong> صفحه HTML </p>
+                             </div>
+                             <a href="#" class="btn btn-primary">انتخاب کنید</a> </div>
+                   </div>
+                   <div class="col-sm-4 col-md-4">
+                        <div class="pricing_plan wow fadeInUp">
+                             <h3>پلن حرفه ای <small>این چیزی است واقعا نیاز دارید</small></h3>
+                             <div class="the_price"><span>هزار تومان</span>350</div>
+                             <div class="the_offerings">
+                                   <p> <strong>1</strong> طراحی قالب </p>
+                                  <p> <strong>2</strong> فرم تماس </p>
+                                  <p> <strong>5</strong> صفحه HTML </p>
+                             </div>
+                             <a href="#" class="btn btn-primary">انتخاب کنید</a> </div>
+                   </div>
+              </div>
+         </div>
+    </section>
+
+{% endblock content %}
+{% block down %}
+
+<section class="parallax skincolored call_to_action" style="background-image:url(/services/photos/parallax.jpg)">
+    <div class="overlay"> <img alt="responsive" src="/services/photos/bear.png">
+         <h3>ما محصولات با ارزش برای مشتریان خود طراحی میکنیم</h3>
+         <h4>مشتریان ما همیشه خوشحال و راضی هستند!</h4>
+    </div>
+</section>
+
+{% endblock down %}

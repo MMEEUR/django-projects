@@ -1,0 +1,64 @@
+{% extends 'base.html' %}
+{% load widget_tweaks %}
+
+{% block title %}ثبت نام در گالری{% endblock title %}
+{% block content %}
+
+<div class="full_page_photo no_photo">
+    <div class="container">
+         <div class="hgroup">
+              <div class="hgroup_title animated bounceInUp skincolored">
+                   <div class="container">
+                        <h1>ثبت نام</h1>
+                   </div>
+              </div>
+              <div class="hgroup_subtitle animated bounceInUp"></div>
+         </div>
+    </div>
+</div>
+<div class="main">
+    <div class="container triangles-of-section">
+         <div class="triangle-up-left"></div>
+         <div class="square-left"></div>
+         <div class="triangle-up-right"></div>
+         <div class="square-right"></div>
+    </div>
+    <section>
+         <div class="container">
+               <div class="col-sm-6 col-md-6"></div>
+               <div class="signup" dir="rtl">
+               <form method="post">
+                   <fieldset>
+                        <div class="social_sign">
+                             <h3>هنوز حساب کاربری ندارید؟</h3>
+                             <a><i class="fa fa-user"></i></a> </div>
+                        <p class="sign_title">یک حساب جدید بسازید. رایگان است!</p>
+                        <div class="row">
+                             <div class="col-lg-2"></div>
+                             <div class="col-lg-8">
+                                   {{ user_form.username|attr:"placeholder:نام کاربری"|attr:"class:form-control"|attr:"type:text" }}
+                                   {{ user_form.email|attr:"placeholder:ایمیل"|attr:"class:form-control"|attr:"type:text" }}
+                                   {{ user_form.password|attr:"placeholder:رمز عبور"|attr:"class:form-control" }}
+                                   {% if user_form.errors %}
+                                   <p class="text-danger">رمز عبور یکسان نیست</p>
+                                   {% endif %}
+                                   {{ user_form.confirm_password|attr:"placeholder:تکرار رمز عبور"|attr:"class:form-control" }}
+                                   <div class="checkbox">
+                                        <label class="">
+                                             <input name="checkboxes" value="Option one" type="checkbox">
+                                             من <a href="#">قوانین و مقررات</a> را مطالعه کرده ام.</label>
+                                   </div>
+                              </div>
+                              <div class="col-lg-2"></div>
+                         </div>
+                         <button type="submit" class="btn btn-success">ساخت حساب کاربری</button>
+                    </fieldset>
+                    {% csrf_token %}
+               </form><br><br>
+               <a href="{% url 'account:login' %}">قبلا ثبت نام کرده اید؟ وارد حساب کاربری خود شوید!</a>
+               </div>
+               <div class="col-lg-2"></div>
+          </div>
+     </section>
+
+{% endblock content %}

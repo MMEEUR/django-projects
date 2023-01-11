@@ -1,0 +1,72 @@
+{% extends 'base.html' %}
+{% load widget_tweaks %}
+
+{% block title %}ورود به حساب کاربری{% endblock title %}
+{% block content %}
+
+<div class="full_page_photo no_photo">
+    <div class="container">
+         <div class="hgroup">
+              <div class="hgroup_title animated bounceInUp skincolored">
+                   <div class="container">
+                        <h1>ورود</h1>
+                   </div>
+              </div>
+              <div class="hgroup_subtitle animated bounceInUp"></div>
+         </div>
+    </div>
+</div>
+<div class="main">
+    <div class="container triangles-of-section">
+         <div class="triangle-up-left"></div>
+         <div class="square-left"></div>
+         <div class="triangle-up-right"></div>
+         <div class="square-right"></div>
+    </div>
+    <section>
+     <div class="container">
+          <div class="col-sm-6 col-md-6"></div>
+          <div class="signin" dir="rtl">
+               {% if request.user.is_authenticated %}                    
+               <h4>وارد داشبورد خود شوید</h4><br>
+               <a id="submit_btn" class="btn btn-primary" name="submit" href="{% url 'account:dashboard' %}">داشبورد</a>
+               {% else %}
+               <div class="social_sign">
+                    <h3>از طریق حساب های اجتماعی خود وارد شوید</h3>
+                    <a class="fb" href="#facebook"><i class="fa fa-facebook"></i></a> <a class="tw" href="#twitter"><i class="fa fa-twitter"></i></a> <a class="gp" href="#googleplus"><i class="fa fa-google-plus"></i></a> </div>
+               <div class="or">
+                    <div class="or_l"></div>
+                    <span>یا</span>
+                    <div class="or_r"></div>
+               </div>
+               <p class="sign_title">از طریق حساب کاربری خود در سایت وارد شوید</p>
+             <div class="row">
+                  <div class="col-lg-2"></div>
+                  <div class="form col-lg-8" dir="rtl">       
+                    <form action="{% url 'account:login' %}" method="post">
+                         {% if form.errors %}
+                              <p class="text-danger">اطلاعات وارد شده صحیح نیست</p>
+                         {% endif %}
+                         {{ form.username|attr:"placeholder:نام کاربری یا ایمیل"|attr:"class:form-control"|attr:"type:text" }}
+                         {{ form.password|attr:"placeholder:رمز عبور"|attr:"class:form-control" }}
+                         <div class="forgot">
+                              <div class="checkbox">
+                                   <label class="">{{ form.remember_me }}به یاد داشته باش </label>
+                              </div>
+                            <a href="{% url 'account:password_reset' %}">فراموشی رمز عبور؟</a>
+                         </div>
+                         <input type="hidden" name="next" value="{{ next }}"/>
+                         <button type="submit" class="btn btn-primary">ورود</button>
+                         {% csrf_token %}
+                   </form>
+                   
+                  </div>
+                  <div class="col-lg-2"></div>
+               </div><br><br>
+               <a href="{% url 'account:register' %}">هنوز حساب کاربری ندارید؟ یک حساب جدید بسازید. رایگان است!</a>
+               {% endif %}
+          </div>
+      </div>
+    </section>
+    
+{% endblock content %}

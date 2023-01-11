@@ -1,0 +1,143 @@
+{% extends 'base.html' %}
+{% load blog_tags %}
+
+{% block title %}
+
+{% if query %}شما برای   *{{ query }}*   جستجو کردید{% else %}جستجو در وبلاگ{% endif %}
+
+{% endblock title %}
+
+{% block content %}
+
+{% if query %}
+
+<div class="full_page_photo" style="background-image:url('/blog/photos/blog.jpg')">
+    <div class="hgroup">
+         <div class="hgroup_title animated bounceInUp">
+              <div class="container">
+                   <h1>نتایج جستجو در<strong>وبلاگ</strong></h1>
+              </div>
+         </div>
+         <div class="hgroup_subtitle animated bounceInUp skincolored">
+              <div class="container">
+                   <p>جستجو عبارت *{{ query }}* در وبلاگ</p>
+              </div>
+         </div>
+    </div>
+</div>
+<div class="main">
+    <div class="container triangles-of-section">
+         <div class="triangle-up-left"></div>
+         <div class="square-left"></div>
+         <div class="triangle-up-right"></div>
+         <div class="square-right"></div>
+    </div>
+    <section class="call_to_action four-o-four">
+        <div class="container"> <i class="fa fa-search"></i>
+            <h4>نتایج جستجو برای *{{ query }}*</h4>
+            
+        </div>
+   </section>
+   <section class="with_right_sidebar">
+        <div class="container">
+            <div class="row">
+                <div id="leftcol" class="col-sm-8 col-md-8" dir="rtl">
+                    {% for post in results %}
+                    {% with post.comments.count as total_comments %}
+                        <article class="post">
+                            <div class="post_header">
+                                <h3 class="post_title"><a href="{{ post.get_absolute_url }}">{{ post.title }}</a></h3>
+                                <div class="post_sub" style="direction: rtl;"><i class="fa-time"></i>منتشر شده در {{ post.publish }} توسط {{ post.author }}<a href="{{ post.get_absolute_url }}#post_comments"><i class="fa-comments-alt"></i>--- نظر {{ total_comments }}</a> </div>
+                            </div>
+                            <div class="post_content">
+                                <figure><a href="{{ post.get_absolute_url }}"><img alt="عکس پست" src="{{ post.picture.url }}"></a></figure>
+                                <p>{{ post.body|truncatewords:30|linebreaks }}</p>
+                                <a href="{{ post.get_absolute_url }}" class="btn btn-primary">بیشتر بخوانید</a> </div>
+                        </article>
+                    {% endwith %}
+                    {% empty %}
+                        <h4>نتیجه‌ای یافت نشد</h4>
+                        <a id="submit_btn" class="btn btn-primary" name="submit" href="{% url 'blog:post_search' %}">جستجو دوباره</a>
+                    {% endfor %}
+                </div>
+                <div id="sidebar" class="col-sm-4 col-md-4" dir="rtl">
+                    <aside class="widget">
+                         <h4>نتایج جستجو</h4>
+                         <p>تعداد نتایج یافت شده: {{ results.count }}</p><br>
+                         <a id="submit_btn" class="btn btn-primary" name="submit" href="{% url 'blog:post_search' %}">جستجو در وبلاگ</a>
+                    </aside>
+                    <aside class="widget ads clearfix">
+                         <h4>تبلیغات</h4>
+                         <a href="#"><img src="http://placehold.it/110" alt=""></a> <a href="#"><img src="http://placehold.it/110" alt=""></a> <a href="#"><img src="http://placehold.it/110" alt=""></a> </aside>
+                    <aside class="widget">
+                         <h4>تب‌ها</h4>
+                         <ul class="nav nav-tabs" id="myTab">
+                              <li class="active"><a data-toggle="tab" href="#recent">اخیر</a></li>
+                              <li class=""><a data-toggle="tab" href="#tags">برچسب‌ها</a></li>
+                         </ul>
+                         <div class="tab-content" id="myTabContent">
+                              <div id="recent" class="tab-pane fade active in">
+                                   <ul class="media-list">
+                                        {% show_latest_posts 3 %}
+                                   </ul>
+                              </div>
+                              <div id="tags" class="tab-pane fade">                                             
+                                   {% for tag in tags %}
+                                        <a class="label label-{% cycle 'default' 'primary' 'success' 'warning' 'danger' 'info' %}" href="{% url 'blog:post_list_by_tag' tag.slug %}">{{ tag.name }}</a>
+                                   {% endfor %}
+                              </div>
+                         </div>
+                    </aside>
+               </div>
+            </div>
+        </div>
+    </section>
+
+{% else %}
+
+<div class="full_page_photo" style="background-image: url(/blog/photos/blog.jpg);">
+    <div class="hgroup">
+         <div class="hgroup_title animated bounceInUp">
+              <div class="container">
+                   <h1>جستجو در <strong>وبلاگ</strong></h1>
+              </div>
+         </div>
+         <div class="hgroup_subtitle animated bounceInUp skincolored">
+              <div class="container">
+                   <p>جستجو کلمات و عبارات مورد نظر در وبلاگ</p>
+              </div>
+         </div>
+    </div>
+</div>
+<div class="main">
+    <div class="container triangles-of-section">
+         <div class="triangle-up-left"></div>
+         <div class="square-left"></div>
+         <div class="triangle-up-right"></div>
+         <div class="square-right"></div>
+    </div>
+    <section class="call_to_action four-o-four">
+        <div class="container"> <i class="fa fa-search"></i>
+            <h4>می توانید از طریق فرم زیر به جستجو عبارت یا صفحه خود بپردازید.</h4>
+            
+        </div>
+   </section>
+    <section>
+         <div class="container">
+              <div class="search_form">
+                   <form name="search_form" id="search_form" method="get">
+                        <div class="row">
+                            <div class="col-sm-2 col-md-2"></div>
+                            <div class="col-sm-6 col-md-6">
+                                {{ form.query }}
+                            </div>
+                            <div class="col-sm-4 col-md-4" style="text-align:right;"> <button id="submit_btn" class="btn btn-primary" type="submit">جستجو</button> </div>
+                            <div class="col-sm-2 col-md-2"></div>
+                        </div>
+                   </form>
+              </div>
+         </div>
+    </section>
+
+{% endif %}
+{% endblock content %}

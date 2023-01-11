@@ -1,0 +1,75 @@
+{% extends 'base.html' %}
+
+{% block title %}درباره ما{% endblock title %}
+{% block content %}
+
+<div class="full_page_photo" style="background-image: url(/about/photos/small_team.jpg);">
+    <div class="hgroup">
+         <div class="hgroup_title animated bounceInUp">
+              <div class="container">
+                   <h1 class="">درباره ما</h1>
+              </div>
+         </div>
+         <div class="hgroup_subtitle animated bounceInUp skincolored">
+              <div class="container">
+                   <p>کارهای بزرگ با تیمی کوچک و صمیمی!</p>
+              </div>
+         </div>
+    </div>
+</div>
+<div class="main">
+    <div class="container triangles-of-section">
+         <div class="triangle-up-left"></div>
+         <div class="square-left"></div>
+         <div class="triangle-up-right"></div>
+         <div class="square-right"></div>
+    </div>
+    <section class="horizontal_teaser">
+         <div class="container">
+              <div class="row">
+                   <div class="col-sm-12 col-md-4 horizontal_teaser_left">
+                        <h3>ما مراقب پروژه های خود هستیم</h3>
+                        <p>لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ و با استفاده از طراحان گرافیک است. چاپگرها و متون بلکه روزنامه و مجله در ستون و سطرآنچنان که لازم است و برای شرایط فعلی تکنولوژی مورد نیاز و کاربردهای متنوع با هدف بهبود ابزارهای کاربردی می باشد.</p>
+                        <p>لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ و با استفاده از طراحان گرافیک است. چاپگرها و متون بلکه روزنامه و مجله در ستون و سطرآنچنان که لازم است و برای شرایط فعلی تکنولوژی مورد نیاز و کاربردهای متنوع با هدف بهبود ابزارهای کاربردی می باشد. </p>
+                   </div>
+                   <div class="col-sm-12 col-md-8 horizontal_teaser_right">
+                        <iframe class="video_iframe" src="http://player.vimeo.com/video/71409522?title=0&amp;byline=0&amp;portrait=0"></iframe>
+                   </div>
+              </div>
+         </div>
+    </section>
+    <section class="parallax call_to_action" style="background-image:url(/about/photos/parallax.jpg)">
+         <div class="overlay"> <img alt="responsive" src="/about/photos/rocket_trans.png">
+              <h3>ایده های خود را به ما بسپارید</h3>
+              <!--<h4>لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ و با استفاده از طراحان گرافیک است!</h4>-->
+         </div>
+    </section>
+    <section class="team_members">
+        <div class="container triangles-of-section">
+            <div class="triangle-up-left"></div>
+            <div class="square-left"></div>
+            <div class="triangle-up-right"></div>
+            <div class="square-right"></div>
+        </div>
+        <div class="container">
+            <h2 class="section_header fancy centered">با تیم ما آشنا شوید... <small>لورم ایپسوم متن ساختگی با تولید سادگی نا!</small></h2>
+            <div class="row">
+                {% for user in users %}
+                    {% if user.task %}
+                    <div class="col-sm-6 col-md-3">
+                        <div class="team_member">
+                            <figure style="background-image: url({{ user.photo.url }})"><img width="180" height="180" src="{{ user.photo.url }}" alt="1a"></figure>
+                            <h5>{{ user.user.get_full_name }}</h5>
+                            <small>{{ user.get_task_display }}</small>
+                            <hr>
+                            <div class="team_social"> <a href="https://www.facebook.com"><i class="fa fa-facebook"></i></a> <a href="https://twitter.com"><i class="fa fa-twitter"></i></a> <a href="https://www.pinterest.com/"><i class="fa fa-linkedin"></i></a> <a href="https://github.com/"><i class="fa fa-github-alt"></i></a> </div>
+                            <p class="short_bio">{{ user.bio }}</p>
+                        </div>
+                    </div>
+                   {% endif %}
+                {% endfor %}
+              </div>
+         </div>
+    </section>
+
+{% endblock content %}

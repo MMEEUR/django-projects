@@ -1,0 +1,106 @@
+{% extends 'base.html' %}
+{% load blog_tags %}
+
+{% block title %}وبلاگ گالری{% endblock title %}
+{% block content %}
+     <div class="full_page_photo no_photo" style="background-image:url('/blog/photos/blog.jpg')">
+          <div class="container">
+               <div class="hgroup">
+                    <div class="hgroup_title animated bounceInUp">
+                         <div class="container">
+                              <h1>وبلاگ</h1>
+                         </div>
+                    </div>
+                    <div class="hgroup_subtitle animated bounceInUp skincolored">
+                         <div class="container">
+                              <p>مطالب خواندنی و مفید در وبلاگ این گالری </p>
+                         </div>
+                    </div>
+               </div>
+          </div>
+     </div>
+     <div class="main">
+          <div class="container triangles-of-section">
+               <div class="triangle-up-left"></div>
+               <div class="square-left"></div>
+               <div class="triangle-up-right"></div>
+               <div class="square-right"></div>
+          </div>
+          <section class="with_right_sidebar">
+               <div class="container">
+                    <div class="row">
+                         <div id="leftcol" class="col-sm-8 col-md-8">
+                              {% for post in posts %}
+                              {% comment %} {% with post.comments.count as total_comments %} {% endcomment %}
+                              <article class="post">
+                                   <div class="post_header">
+                                        <h3 class="post_title"><a href="{{ post.get_absolute_url }}">{{ post.title }}</a></h3>
+                                        <div class="post_sub" style="direction: rtl;">
+                                             <i class="fa-time"></i>منتشر شده در {{ post.publish }} توسط {{ post.author }}<a href="{{ post.get_absolute_url }}#post_comments"><i class="fa-comments-alt"></i>--- نظر {{ post.comments.count }}</a> 
+                                        </div>
+                                   </div>
+                                   <div class="post_content">
+                                        <figure><a href="{{ post.get_absolute_url }}"><img alt="عکس پست" src="{{ post.picture.url }}"></a></figure>
+                                        <p>{{ post.body|truncatewords:30|linebreaks }}</p>
+                                        <a href="{{ post.get_absolute_url }}" class="btn btn-primary">بیشتر بخوانید</a> </div>
+                              </article>
+                              {% comment %} {% endwith %} {% endcomment %}
+                              {% endfor %}
+                              {% with posts as page %}
+                              <div class="pagination_wrapper">
+                                   <ul class="pagination pagination-centered"> 
+                                        {% if page.has_previous %}
+                                        <li class="active"><a href="?page={{ page.previous_page_number }}">»</a></li>
+                                        {% else %}                                     
+                                        <li class="disabled"><a href="#">»</a></li>
+                                        {% endif %}
+                                        {% for i in page.paginator.page_range %}
+                                             {% if page.number == i %}                                    
+                                             <li class="disabled"><a href="#">{{ i }}</a></li>
+                                             {% else %}  
+                                             <li><a href="?page={{ i }}">{{ i }}</a></li>
+                                             {% endif %}
+                                        {% endfor %}
+                                        {% if page.has_next %}
+                                        <li class="active"><a href="?page={{ page.next_page_number }}">«</a></li>
+                                        {% else %}
+                                        <li class="disabled"><a href="#">«</a></li>
+                                        {% endif %}
+                                   </ul>
+                              </div>
+                              {% endwith %}
+                         </div>
+                         <div id="sidebar" class="col-sm-4 col-md-4" dir="rtl">
+                              <aside class="widget">
+                                   <h4>وبلاگ گالری</h4></br>
+                                   <p>به وبلاگ گالری خوش‌آمدید</p>
+                                   <p>تعداد پست‌ها: {% total_posts %}</p></br>
+                                   <a id="submit_btn" class="btn btn-primary" name="submit" href="{% url 'blog:post_search' %}">جستجو در وبلاگ</a>
+                              </aside>
+                              <aside class="widget ads clearfix">
+                                   <h4>تبلیغات</h4>
+                                   <a href="#"><img src="http://placehold.it/110" alt=""></a> <a href="#"><img src="http://placehold.it/110" alt=""></a> <a href="#"><img src="http://placehold.it/110" alt=""></a> </aside>
+                              <aside class="widget">
+                                   <h4>تب‌ها</h4>
+                                   <ul class="nav nav-tabs" id="myTab">
+                                        <li class="active"><a data-toggle="tab" href="#recent">اخیر</a></li>
+                                        <li class=""><a data-toggle="tab" href="#tags">برچسب‌ها</a></li>
+                                   </ul>
+                                   <div class="tab-content" id="myTabContent">
+                                        <div id="recent" class="tab-pane fade active in">
+                                             <ul class="media-list">
+                                                  {% show_latest_posts 3 %}
+                                             </ul>
+                                        </div>
+                                        <div id="tags" class="tab-pane fade">                                             
+                                             {% for tag in tags %}
+                                                  <a class="label label-{% cycle 'default' 'primary' 'success' 'warning' 'danger' 'info' %}" href="{% url 'blog:post_list_by_tag' tag.slug %}">{{ tag.name }}</a>
+                                             {% endfor %}
+                                        </div>
+                                   </div>
+                              </aside>
+                         </div>
+                    </div>
+               </div>
+          </section>
+{% endblock content %}

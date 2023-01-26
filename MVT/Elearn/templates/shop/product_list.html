@@ -45,10 +45,10 @@
                         </ul> <!-- nav -->
                     </div><!-- shop bar -->
                     <div class="shop-select">
-                       <select>
-                            <option value="{% url 'shop:product_list' %}">All</option>
+                       <select class="select_cat">
+                            <option value=""><a data-filter="*">All</a></option>
                             {% for cat in categories %}
-                                <option value="{{ cat.slug }}   "><a href="{{ cat.get_absolute_url }}">{{ cat.name }}</a></option>
+                                <a href="#" data-filter=".cat_{{ category.name }}"><option value="">{{ cat.name }}</option></a>
                             {% endfor %}
                         </select>
                     </div> <!-- shop select -->
@@ -59,7 +59,7 @@
           <div class="tab-pane fade show active" id="shop-grid" role="tabpanel" aria-labelledby="shop-grid-tab">
                 <div class="row justify-content-center">
                     {% for product in products %}
-                    <div class="col-lg-3 col-md-6 col-sm-8">
+                    <div class="col-lg-3 col-md-6 col-sm-8  cat_{{ product.category }}">
                         <div class="singel-publication mt-30">
                             <div class="image">
                                 <img src="{{ product.image.url }}" alt="{{ product.name }}">
@@ -87,7 +87,7 @@
             <div class="tab-pane fade" id="shop-list" role="tabpanel" aria-labelledby="shop-list-tab">
                 <div class="row">
                     {% for product in products %}
-                    <div class="col-lg-6">
+                    <div class="col-lg-6 cat_{{ product.category }}">
                         <div class="singel-publication mt-30">
                             <div class="row">
                                 <div class="col-sm-6">

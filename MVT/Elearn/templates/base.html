@@ -44,9 +44,11 @@
     <link rel="stylesheet" href="{% static 'css/style.css' %}">
     
     <!--====== Responsive css ======-->
-    <link rel="stylesheet" href="{% static 'css/responsive.css' %}">
-  
-  
+    <link rel="stylesheet" href="{% static 'css/responsive.css' %}">\
+
+    <!--====== Custom css ======-->
+    {% block style %}{% endblock style %}
+    
 </head>
 
 <body>
@@ -385,6 +387,9 @@
     <!--====== Map js ======-->
     <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDC3Ip9iVC0nIxC6V14CKLQ1HZNF_65qEQ"></script>
     <script src="{% static 'js/map-script.js' %}"></script>
+
+    <!--====== Custom js ======-->
+    {% block script %}{% endblock script %}
 
 </body>
 </html>

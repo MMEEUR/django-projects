@@ -41,7 +41,7 @@
                             <li class="nav-item">
                                 <a id="shop-list-tab" data-toggle="tab" href="#shop-list" role="tab" aria-controls="shop-list" aria-selected="false"><i class="fa fa-th-list"></i></a>
                             </li>
-                            <li class="nav-item">Showning {{ products_count }} of {{ total_products }} Results</li>
+                            <li class="nav-item">Showning {{ products.paginator.count }} of {{ products_count }} Results</li>
                         </ul> <!-- nav -->
                     </div><!-- shop bar -->
                     <div class="shop-select">
@@ -62,7 +62,7 @@
                     <div class="col-lg-3 col-md-6 col-sm-8">
                         <div class="singel-publication mt-30">
                             <div class="image">
-                                <img src="{{ product.image.url }}" alt="{{ product.name }}">
+                                <img width="215" height='285' src="{{ product.image.url }}" alt="{{ product.name }}">
                                 <div class="add-cart">
                                     <ul>
                                         <li><a href="#"><i class="fa fa-shopping-cart"></i></a></li>
@@ -92,7 +92,7 @@
                             <div class="row">
                                 <div class="col-sm-6">
                                     <div class="image">
-                                        <img src="{{ product.image.url }}" alt="Publication">
+                                        <img width="215" height='285' src="{{ product.image.url }}" alt="{{ product.name }}">
                                         <div class="add-cart">
                                             <ul>
                                                 <li><a href="#"><i class="fa fa-shopping-cart"></i></a></li>
@@ -108,7 +108,7 @@
                                             <span>${{ product.price }}</span>
                                         </div>
                                         <div class="description pt-10">
-                                            <p>{{ product.description }}</p>
+                                            <p>{{ product.description|truncatewords:20 }}</p>
                                         </div>
                                         <div class="button">
                                             <a href="{{ product.get_absolute_url }}" class="main-btn">Buy Now</a>
@@ -124,6 +124,7 @@
         </div> <!-- tab content -->
         <div class="row">
             <div class="col-lg-12">
+                {% with products as page %}
                 <nav class="courses-pagination mt-50">
                     <ul class="pagination justify-content-center">
                         {% if page.has_previous %}
@@ -149,6 +150,7 @@
                         {% endif %}
                     </ul>
                 </nav>  <!-- courses pagination -->
+                {% endwith %}
             </div>
         </div>  <!-- row -->
     </div> <!-- container -->

@@ -11,12 +11,20 @@
         <div class="row">
             <div class="col-lg-12">
                 <div class="page-banner-cont">
-                    <h2>Our Courses</h2>
+                    <h2>{% if category %} {{ category }}{% else %} Our Courses{% endif %}</h2>
                     <nav aria-label="breadcrumb">
+                        {% if category %}
+                        <ol class="breadcrumb">
+                            <li class="breadcrumb-item"><a href="#">Home</a></li>
+                            <li class="breadcrumb-item"><a href="{% url 'shop:product_list' %}">Courses</a></li>
+                            <li class="breadcrumb-item active" aria-current="page">{{ category }}</li>
+                        </ol>
+                        {% else %}
                         <ol class="breadcrumb">
                             <li class="breadcrumb-item"><a href="#">Home</a></li>
                             <li class="breadcrumb-item active" aria-current="page">Courses</li>
                         </ol>
+                        {% endif %}
                     </nav>
                 </div>  <!-- page banner cont -->
             </div>

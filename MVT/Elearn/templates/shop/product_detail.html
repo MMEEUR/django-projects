@@ -6,16 +6,17 @@
 
 <!--====== PAGE BANNER PART START ======-->
     
-<section id="page-banner" class="pt-105 pb-130 bg_cover" data-overlay="8" style="background-image: url(/global/page-banner-5.jpg)">
+<section id="page-banner" class="pt-105 pb-110 bg_cover" data-overlay="8" style="background-image: url(/global/page-banner-2.jpg)">
     <div class="container">
         <div class="row">
             <div class="col-lg-12">
                 <div class="page-banner-cont">
-                    <h2>Shop</h2>
+                    <h2>{{ product.name }}</h2>
                     <nav aria-label="breadcrumb">
                         <ol class="breadcrumb">
                             <li class="breadcrumb-item"><a href="#">Home</a></li>
-                            <li class="breadcrumb-item active" aria-current="page">Shop</li>
+                            <li class="breadcrumb-item"><a href="{% url 'shop:product_list' %}">Courses</a></li>
+                            <li class="breadcrumb-item active" aria-current="page">{{ product.name }}</li>
                         </ol>
                     </nav>
                 </div>  <!-- page banner cont -->
@@ -26,101 +27,140 @@
 
 <!--====== PAGE BANNER PART ENDS ======-->
 
-<!--====== SHOP PART START ======-->
+<!--====== COURSES SINGEl PART START ======-->
 
-<section id="shop-singel" class="pt-120 pb-120 gray-bg">
+<section id="corses-singel" class="pt-90 pb-120 gray-bg">
     <div class="container">
-        <div class="shop-destails">
-            <div class="row">
-                <div class="col-lg-6">
-                    <div class="shop-left pt-30">
-                        <div class="tab-content" id="pills-tabContent">
-                            <div class="tab-pane fade show active" id="pills-image-1" role="tabpanel" aria-labelledby="pills-image-1-tab">
-                                <div class="shop-image">
-                                    <a href="{{ product.image.url }}" class="shop-items"><img src="{{ product.image.url }}" alt="Shop"></a>
+        <div class="row">
+            <div class="col-lg-8">
+                <div class="corses-singel-left mt-30">
+                    <div class="title">
+                        <h3>{{ product.name }}</h3>
+                    </div> <!-- title -->
+                    <div class="course-terms">
+                        <ul>
+                            <li>
+                                <div class="teacher-name">
+                                    <div class="thum">
+                                        <a href="{{ product.teacher.get_absolute_url }}"><img width="40" height="40" src="{{ product.teacher.picture.url }}" alt="{{ product.teacher.name }}"></a>
+                                    </div>
+                                    <div class="name">
+                                        <span>Teacher</span>
+                                        <h6><a href="{{ product.teacher.get_absolute_url }}">{{ product.teacher.name }}</a></h6>
+                                    </div>
                                 </div>
-                            </div>
-                            <div class="tab-pane fade" id="pills-image-2" role="tabpanel" aria-labelledby="pills-image-2-tab">
-                                <div class="shop-image">
-                                    <a href="{{ product.image2.url }}" class="shop-items"><img src="{{ product.image2.url }}" alt="Shop"></a>
-                                </div>
-                            </div>
-                            <div class="tab-pane fade" id="pills-image-3" role="tabpanel" aria-labelledby="pills-image-3-tab">
-                                <div class="shop-image">
-                                    <a href="{{ product.image3.url }}" class="shop-items"><img src="{{ product.image3.url }}" alt="Shop"></a>
-                                </div>
-                            </div>
-                            <div class="tab-pane fade" id="pills-image-4" role="tabpanel" aria-labelledby="pills-image-4-tab">
-                                <div class="shop-image">
-                                    <a href="{{ product.image4.url }}" class="shop-items"><img src="{{ product.image4.url }}" alt="Shop"></a>
-                                </div>
-                            </div>
-                        </div>
-                        <ul class="nav nav-justified mt-30" id="pills-tab" role="tablist">
-                            <li class="nav-item">
-                                <a class="active" id="pills-image-1-tab" data-toggle="pill" href="#pills-image-1" role="tab" aria-controls="pills-image-1" aria-selected="true">
-                                    <span class="shop-thum">
-                                        <img src="{{ product.image.url }}" alt="Thum">
-                                    </span>
-                                </a>
                             </li>
-                            <li class="nav-item">
-                                <a id="pills-image-2-tab" data-toggle="pill" href="#pills-image-2" role="tab" aria-controls="pills-image-2" aria-selected="false">
-                                    <span class="shop-thum">
-                                        <img src="{{ product.image2.url }}" alt="Thum">
-                                    </span>
-                                </a>
+                            <li>
+                                <div class="course-category">
+                                    <span>Category</span>
+                                    <h6><a href="{{ product.category.get_absolute_url }}" >{{ product.category }}</a></h6>
+                                </div>
                             </li>
-                            <li class="nav-item">
-                                <a id="pills-image-3-tab" data-toggle="pill" href="#pills-image-3" role="tab" aria-controls="pills-image-1" aria-selected="false">
-                                    <span class="shop-thum">
-                                        <img src="{{ product.image3.url }}" alt="Thum">
-                                    </span>
-                                </a>
-                            </li>
-                            <li class="nav-item">
-                                <a id="pills-image-4-tab" data-toggle="pill" href="#pills-image-4" role="tab" aria-controls="pills-image-4" aria-selected="false">
-                                    <span class="shop-thum">
-                                        <img src="{{ product.image4.url }}" alt="Thum">
-                                    </span>
-                                </a>
+                            <li>
+                                <div class="review">
+                                    <span>Review</span>
+                                    <ul>
+                                        <li><a href="#"><i class="fa fa-star"></i></a></li>
+                                        <li><a href="#"><i class="fa fa-star"></i></a></li>
+                                        <li><a href="#"><i class="fa fa-star"></i></a></li>
+                                        <li><a href="#"><i class="fa fa-star"></i></a></li>
+                                        <li><a href="#"><i class="fa fa-star"></i></a></li>
+                                        <li class="rating">(20 Reviws)</li>
+                                    </ul>
+                                </div>
                             </li>
                         </ul>
-                    </div> <!-- shop left -->
-                </div>
-                <div class="col-lg-6">
-                    <div class="shop-right pt-30">
-                        <h6>{{ product.name }}</h6>
-                        <span>${{ product.price }}</span>
-                        <p>{{ product.description }}</p>
-                        <div class="nice-number pt-15">
-                            <input type="number" value="1">
-                        </div>
-                        <div class="add-btn pt-15">
-                            <button type="button" class="main-btn">Add to Cart</button>
-                        </div>
-                    </div>
-                </div>
-            </div>  <!-- row -->
-            <div class="row">
-                <div class="col-lg-12">
-                    <div class="shop-reviews mt-60">
-                        <ul class="nav" id="myTab" role="tablist">
+                    </div> <!-- course terms -->
+                    
+                    <div class="corses-singel-image pt-50">
+                        <img src="{{ product.image.url }}" alt="{{ product.name }}">
+                    </div> <!-- corses singel image -->
+                    
+                    <div class="corses-tab mt-30">
+                        <ul class="nav nav-justified" id="myTab" role="tablist">
                             <li class="nav-item">
-                                <a class="active" id="description-tab" data-toggle="tab" href="#description" role="tab" aria-controls="description" aria-selected="true">Description</a>
+                                <a class="active" id="overview-tab" data-toggle="tab" href="#overview" role="tab" aria-controls="overview" aria-selected="true">Overview</a>
+                            </li>
+                            <li class="nav-item">
+                                <a id="curriculam-tab" data-toggle="tab" href="#curriculam" role="tab" aria-controls="curriculam" aria-selected="false">Curriculam</a>
+                            </li>
+                            <li class="nav-item">
+                                <a id="instructor-tab" data-toggle="tab" href="#instructor" role="tab" aria-controls="instructor" aria-selected="false">Instructor</a>
                             </li>
                             <li class="nav-item">
                                 <a id="reviews-tab" data-toggle="tab" href="#reviews" role="tab" aria-controls="reviews" aria-selected="false">Reviews</a>
                             </li>
-                        </ul> <!-- nav -->
+                        </ul>
+                        
                         <div class="tab-content" id="myTabContent">
-                            <div class="tab-pane fade show active" id="description" role="tabpanel" aria-labelledby="description-tab">
-                                <div class="description-cont pt-40">
-                                    <p>{{ product.description }}</p>
-                                </div>
-                            </div> <!-- row -->
+                            <div class="tab-pane fade show active" id="overview" role="tabpanel" aria-labelledby="overview-tab">
+                                <div class="overview-description">
+                                    <div class="singel-description pt-40">
+                                        <h6>Course Summery</h6>
+                                        <p>{{ product.summery }}</p>
+                                    </div>
+                                    <div class="singel-description pt-40">
+                                        <h6>Requrements</h6>
+                                        <p>{{ product.requirements }}</p>
+                                    </div>
+                                </div> <!-- overview description -->
+                            </div>
+                            <div class="tab-pane fade" id="curriculam" role="tabpanel" aria-labelledby="curriculam-tab">
+                                <div class="curriculam-cont">
+                                    <div class="title">
+                                        <h6>{{ product.name }}</h6>
+                                    </div>
+                                    <div class="accordion" id="accordionExample">
+                                        {% for lecture in product_lectures %}
+                                        <div class="card">
+                                            <div class="card-header" id="heading{{ lecture.id }}">
+                                                <a href="#" data-toggle="collapse" class="collapsed" data-target="#collapse{{ lecture.id }}" aria-expanded="true" aria-controls="collapse{{ lecture.id }}">
+                                                    <ul>
+                                                        <li><i class="fa fa-file-o"></i></li>
+                                                        <li><span class="lecture">Lecture {{ lecture.id }}</span></li>
+                                                        <li><span class="head">{{ lecture.name }}</span></li>
+                                                        <li><span class="time d-none d-md-block"><i class="fa fa-clock-o"></i> <span>{{ lecture.duaration }}</span></span></li>
+                                                    </ul>
+                                                </a>
+                                            </div>
+
+                                            <div id="collapse{{ lecture.id }}" class="collapse" aria-labelledby="heading{{ lecture.id }}" data-parent="#accordionExample">
+                                                <div class="card-body">
+                                                    <p>{{ lecture.description }}</p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        {% endfor %}
+                                    </div>
+                                </div> <!-- curriculam cont -->
+                            </div>
+                            <div class="tab-pane fade" id="instructor" role="tabpanel" aria-labelledby="instructor-tab">
+                                <div class="instructor-cont">
+                                    <div class="instructor-author">
+                                        <div class="author-thum">
+                                            <a href="{{ product.teacher.get_absolute_url }}"><img width="150" height="150" src="{{ product.teacher.picture.url }}" alt="{{ product.teacher.name }}"></a>
+                                        </div>
+                                        <div class="author-name">
+                                            <a href="{{ product.teacher.get_absolute_url }}"><h5>{{ product.teacher.name }}</h5></a>
+                                            <span>{{ product.teacher.role }}</span>
+                                            <ul class="social">
+                                                <li><a href="#"><i class="fa fa-facebook-f"></i></a></li>
+                                                <li><a href="#"><i class="fa fa-twitter"></i></a></li>
+                                                <li><a href="#"><i class="fa fa-google-plus"></i></a></li>
+                                                <li><a href="#"><i class="fa fa-instagram"></i></a></li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                    <div class="instructor-description pt-25">
+                                        <p>{{ product.teacher.about }}</p>
+                                    </div>
+                                </div> <!-- instructor cont -->
+                            </div>
                             <div class="tab-pane fade" id="reviews" role="tabpanel" aria-labelledby="reviews-tab">
                                 <div class="reviews-cont">
+                                    <div class="title">
+                                        <h6>Student Reviews</h6>
+                                    </div>
                                     <ul>
                                        <li>
                                            <div class="singel-reviews">
@@ -174,7 +214,36 @@
                                                 </div>
                                             </div> <!-- singel reviews -->
                                        </li>
+                                       <li>
+                                           <div class="singel-reviews">
+                                                <div class="reviews-author">
+                                                    <div class="author-thum">
+                                                        <img src="images/review/r-3.jpg" alt="Reviews">
+                                                    </div>
+                                                    <div class="author-name">
+                                                        <h6>Tania Aktar</h6>
+                                                        <span>April 20, 2019</span>
+                                                    </div>
+                                                </div>
+                                                <div class="reviews-description pt-20">
+                                                    <p>There are many variations of passages of Lorem Ipsum available, but the majority have suffered alteration in some form, by injected humour, or randomised words which.</p>
+                                                    <div class="rating">
+                                                        <ul>
+                                                            <li><i class="fa fa-star"></i></li>
+                                                            <li><i class="fa fa-star"></i></li>
+                                                            <li><i class="fa fa-star"></i></li>
+                                                            <li><i class="fa fa-star"></i></li>
+                                                            <li><i class="fa fa-star"></i></li>
+                                                        </ul>
+                                                        <span>/ 5 Star</span>
+                                                    </div>
+                                                </div>
+                                            </div> <!-- singel reviews -->
+                                       </li>
                                     </ul>
+                                    <div class="title pt-15">
+                                        <h6>Leave A Comment</h6>
+                                    </div>
                                     <div class="reviews-form">
                                         <form action="#">
                                             <div class="row">
@@ -214,53 +283,107 @@
                                                 </div>
                                             </div> <!-- row -->
                                         </form>
-                                    </div> <!-- reviews form -->
+                                    </div>
+                                </div> <!-- reviews cont -->
+                            </div>
+                        </div> <!-- tab content -->
+                    </div>
+                </div> <!-- corses singel left -->
+                
+            </div>
+            <div class="col-lg-4">
+                <div class="row">
+                    <div class="col-lg-12 col-md-6">
+                        <div class="course-features mt-30">
+                           <h4>Course Features </h4>
+                            <ul>
+                                <li><i class="fa fa-clock-o"></i>Duaration : <span>{{ product.duaration }}</span></li>
+                                <li><i class="fa fa-clone"></i>Leactures : <span>{{ product.lectures.count }}</span></li>
+                                <li><i class="fa fa-beer"></i>Quizzes :  <span>{{ product.quizzes }}</span></li>
+                                <li><i class="fa fa-user-o"></i>Students :  <span>{{ product.students }}</span></li>
+                            </ul>
+                            <div class="price-button pt-10">
+                                <span>Price : <b>${{ product.price }}</b></span>
+                                <a href="#" class="main-btn">Enroll Now</a>
+                            </div>
+                        </div> <!-- course features -->
+                    </div>
+                    <div class="col-lg-12 col-md-6">
+                        <div class="You-makelike mt-30">
+                            <h4>You make like </h4> 
+                            {% for product in latest_products %}
+                            <div class="singel-makelike mt-20">
+                                <div class="image">
+                                    <a href="{{ product.get_absolute_url }}"><img src="{{ product.image.url }}" alt="{{ product.name }}"></a>
                                 </div>
-                            </div> <!-- row -->
-                        </div> <!-- tab-content -->
-                    </div> <!-- shop reviews -->
-                </div>
-            </div> <!-- row -->
-        </div> <!-- shop-destails -->
-        <div class="releted-item pt-110">
-            <div class="row">
-                <div class="col-lg-12">
-                    <div class="title pb-10">
-                        <h3>Releted products</h3>
+                                <div class="cont">
+                                    <a href="{{ product.get_absolute_url }}"><h4>{{ product.name }}</h4></a>
+                                    <ul>
+                                        <li><a href="#"><i class="fa fa-user"></i>{{ product.students }}</a></li>
+                                        <li>${{ product.price }}</li>
+                                    </ul>
+                                </div>
+                            </div>
+                            {% endfor %}
+                        </div>
                     </div>
                 </div>
-            </div> <!-- row -->
-            <div class="row justify-content-center">
-                {% if not releted_products %}<p>There is no related product</p>{% endif %}
-                {% for product in releted_products %}
-                <div class="col-lg-3 col-md-6 col-sm-8">
-                    <div class="singel-publication mt-30">
-                        <div class="image">
-                            <img src="{{ product.image.url }}" alt="Publication">
-                            <div class="add-cart">
-                                <ul>
-                                    <li><a href="#"><i class="fa fa-shopping-cart"></i></a></li>
-                                    <li><a href="#"><i class="fa fa-heart-o"></i></a></li>
-                                </ul>
-                            </div>
+            </div>
+        </div> <!-- row -->
+        <div class="row">
+            <div class="col-lg-8">
+                <div class="releted-courses pt-95">
+                    <div class="title">
+                        <h3>Releted Courses</h3>
+                    </div>
+                    <div class="row">
+                        {% for product in releted_products %}
+                        <div class="col-md-6">
+                            <div class="singel-course mt-30">
+                                <div class="thum">
+                                    <div class="image">
+                                        <a href="{{ product.get_absolute_url }}"><img src="{{ product.image.url }}" alt="{{ product.name }}"></a>
+                                    </div>
+                                    <div class="price">
+                                        <span>${{ product.price }}</span>
+                                    </div>
+                                </div>
+                                <div class="cont">
+                                    <ul>
+                                        <li><i class="fa fa-star"></i></li>
+                                        <li><i class="fa fa-star"></i></li>
+                                        <li><i class="fa fa-star"></i></li>
+                                        <li><i class="fa fa-star"></i></li>
+                                        <li><i class="fa fa-star"></i></li>
+                                    </ul>
+                                    <span>(20 Reviws)</span>
+                                    <a href="{{ product.get_absolute_url }}"><h4>{{ product.name }}</h4></a>
+                                    <div class="course-teacher">
+                                        <div class="thum">
+                                            <a href="{{ product.teacher.get_absolute_url }}"><img src="{{ product.teacher.picture.url }}" alt="{{ product.teacher.name }}"></a>
+                                        </div>
+                                        <div class="name">
+                                            <a href="{{ product.teacher.get_absolute_url }}"><h6>{{ product.teacher.name }}</h6></a>
+                                        </div>
+                                        <div class="admin">
+                                            <ul>
+                                                <li><a href="#"><i class="fa fa-user"></i>{{ product.students }}</a></li>
+                                                <li><a href="#"><i class="fa fa-heart"></i><span>10</span></a></li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div> <!-- singel course -->
                         </div>
-                        <div class="cont">
-                            <div class="name">
-                                <a href="{{ product.get_absolute_url }}"><h6>{{ product.name }}</h6></a>
-                                <span>{{ product.price }}</span>
-                            </div>
-                            <div class="button text-right">
-                                <a href="{{ product.get_absolute_url }}" class="main-btn">Buy Now</a>
-                            </div>
-                        </div>
-                    </div> <!-- singel publication -->
-                </div>
-                {% endfor %}
-            </div>  <!-- row -->
-        </div> <!-- releted item -->
+                        {% endfor %}
+                    </div> <!-- row -->
+                    {% if not releted_products %}<br><h5>There is no releted products </h5>{% endif %}
+                </div> <!-- releted courses -->
+            </div>
+        </div> <!-- row -->
     </div> <!-- container -->
 </section>
 
-<!--====== COURSES PART ENDS ======-->
+<!--====== COURSES SINGEl PART ENDS ======-->
 
 {% endblock content %}

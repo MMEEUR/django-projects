@@ -13,7 +13,7 @@ def productListView(request, cat_slug=None):
         object_list = object_list.filter(category=category)
     
     products_count = object_list.count()
-    paginator = Paginator(object_list, 4)
+    paginator = Paginator(object_list, 6)
     page = request.GET.get('page')
     
     try:

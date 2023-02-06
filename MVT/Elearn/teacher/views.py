@@ -1,8 +1,6 @@
 from django.shortcuts import render, get_object_or_404
 from django.core.paginator import Paginator, PageNotAnInteger, EmptyPage
 from .models import Teacher
-from shop.models import Product
-
 
 # Create your views here.
 def teacherListView(request):
@@ -22,6 +20,6 @@ def teacherListView(request):
 
 def teacherDetailView(request, slug):
     teacher = get_object_or_404(Teacher, slug=slug)
-    teacher_courses = Product.objects.filter(teacher=teacher)
+    teacher_courses = teacher.courses.all()
     
     return render(request, 'teacher/teacher_detail.html', {'teacher': teacher, 'teacher_courses': teacher_courses})

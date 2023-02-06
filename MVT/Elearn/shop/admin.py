@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import Product, Category, Lecture
+from .models import Product, Category, Lecture, Review
 
 # Register your models here.
 @admin.register(Product)
@@ -23,3 +23,10 @@ class LectureAdmin(admin.ModelAdmin):
     list_filter = ('course',)
     ordering = ('course', 'id')
     raw_id_fields = ('course',)
+    
+@admin.register(Review)
+class ReviewAdmin(admin.ModelAdmin):
+    list_display = ('first_name', 'last_name', 'created', 'active')
+    list_filter = ('active',)
+    ordering = ('active', '-created')
+    search_field = ('first_name', 'last_name', 'comment')

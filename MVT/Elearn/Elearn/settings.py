@@ -41,6 +41,7 @@ INSTALLED_APPS = [
     'shop.apps.ShopConfig',
     'cart.apps.CartConfig',
     'teacher.apps.TeacherConfig',
+    'widget_tweaks',
 ]
 
 MIDDLEWARE = [

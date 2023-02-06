@@ -27,6 +27,8 @@ def productListView(request, cat_slug=None):
 
 def productDetailView(request, id, slug):
     product = get_object_or_404(Product, id=id, slug=slug, available=True)
-    releted_products = Product.objects.filter(category=product.category).exclude(id=product.id)
+    product_lectures = product.lectures.all()
+    latest_products = Product.objects.filter(available=True).exclude(id=product.id)[:3]
+    releted_products = Product.objects.filter(category=product.category, available=True).exclude(id=product.id)
     
-    return render(request, 'shop/product_detail.html', {'product': product, 'releted_products': releted_products})
+    return render(request, 'shop/product_detail.html', {'product': product, 'releted_products': releted_products, 'product_lectures': product_lectures, 'latest_products': latest_products})

@@ -48,6 +48,9 @@ class Product(models.Model):
             
         return sum(rating) / len(rating) if rating else 0
     
+    def total_rating(self):
+        return self.reviews.filter(active=True).count()
+    
     def __str__(self):
         return self.name
     

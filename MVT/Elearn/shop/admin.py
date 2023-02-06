@@ -26,7 +26,7 @@ class LectureAdmin(admin.ModelAdmin):
     
 @admin.register(Review)
 class ReviewAdmin(admin.ModelAdmin):
-    list_display = ('first_name', 'last_name', 'created', 'active')
+    list_display = ('first_name', 'last_name', 'rating', 'created', 'active')
     list_filter = ('active',)
     ordering = ('active', '-created')
     search_field = ('first_name', 'last_name', 'comment')

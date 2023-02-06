@@ -78,15 +78,12 @@
                                     {% endif %}
                                 </div>
                             </div>
-                            <div class="cont">
+                            <div class="cont product">
+                                <p style="display:none;">{{ product.average_rating }}</p>
                                 <ul>
-                                    <li><i class="fa fa-star"></i></li>
-                                    <li><i class="fa fa-star"></i></li>
-                                    <li><i class="fa fa-star"></i></li>
-                                    <li><i class="fa fa-star"></i></li>
-                                    <li><i class="fa fa-star"></i></li>
+                                    
                                 </ul>
-                                <span>(20 Reviws)</span>
+                                <span>({{ product.total_rating }} Review{{ product.total_rating|pluralize }})</span>
                                 <a href="{{ product.get_absolute_url }}"><h4>{{ product.name }}</h4></a>
                                 <div class="course-teacher">
                                     <div class="thum">
@@ -129,15 +126,12 @@
                                     </div>
                                 </div>
                                 <div class="col-md-6">
-                                    <div class="cont">
+                                    <div class="cont product">
+                                        <p style="display:none;">{{ product.average_rating }}</p>
                                         <ul>
-                                            <li><i class="fa fa-star"></i></li>
-                                            <li><i class="fa fa-star"></i></li>
-                                            <li><i class="fa fa-star"></i></li>
-                                            <li><i class="fa fa-star"></i></li>
-                                            <li><i class="fa fa-star"></i></li>
+                                            
                                         </ul>
-                                        <span>(20 Reviws)</span>
+                                        <span>({{ product.total_rating }} Review{{ product.total_rating|pluralize }})</span><br>
                                         <a href="{{ product.get_absolute_url }}"><h4>{{ product.name }}</h4></a>
                                         <div class="course-teacher">
                                             <div class="thum">
@@ -199,3 +193,38 @@
 <!--====== COURSES PART ENDS ======-->
 
 {% endblock content %}
+
+{% block script %}
+
+<script>
+
+    let contDivs = document.querySelectorAll('.product');
+
+    contDivs.forEach(div => {
+      let averageRating = div.querySelector('p').textContent;
+      let ul = div.querySelector('ul');
+    
+      for (let i = 1; i <= 5; i++) {
+        let li = document.createElement('li');
+        let icon = document.createElement('i');
+    
+        if (averageRating > i) {
+          if (averageRating - i >= 1) {
+            icon.className = 'fa fa-star';
+          } else {
+            icon.className = 'fa fa-star-half-o';
+          }
+    
+        } else {
+          icon.className = 'fa fa-star-o';
+        }
+    
+        li.appendChild(icon);
+        ul.appendChild(li);
+    
+      }
+    });
+
+</script>
+
+{% endblock script %}

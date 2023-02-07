@@ -74,3 +74,6 @@ class Review(models.Model):
     comment = models.TextField()
     created = models.DateField(auto_now_add=True)
     active = models.BooleanField(default=False)
+    
+    def __str__(self):
+        return f'{self.first_name} {self.last_name}'

@@ -70,9 +70,9 @@ class Review(models.Model):
     course = models.ForeignKey(Product, on_delete=models.CASCADE, related_name='reviews')
     first_name = models.CharField(max_length=50)
     last_name = models.CharField(max_length=50)
-    rating = models.IntegerField(null=True, validators=[MinValueValidator(1), MaxValueValidator(5)])
+    rating = models.IntegerField(validators=[MinValueValidator(1), MaxValueValidator(5)])
     comment = models.TextField()
-    created = models.DateField(auto_now_add=True)
+    created = models.DateTimeField(auto_now_add=True)
     active = models.BooleanField(default=False)
     
     def __str__(self):

@@ -3,7 +3,7 @@ from django.core.paginator import Paginator, PageNotAnInteger, EmptyPage
 from .models import Teacher
 
 # Create your views here.
-def teacherListView(request):
+def teacher_list_view(request):
     object_list = Teacher.objects.all()
     
     paginator = Paginator(object_list, 4)
@@ -18,7 +18,7 @@ def teacherListView(request):
         
     return render(request, 'teacher/teacher_list.html', {'teachers': teachers})
 
-def teacherDetailView(request, slug):
+def teacher_detail_view(request, slug):
     teacher = get_object_or_404(Teacher, slug=slug)
     teacher_courses = teacher.courses.all()
     

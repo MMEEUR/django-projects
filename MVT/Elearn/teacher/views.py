@@ -1,6 +1,7 @@
-from django.shortcuts import render, get_object_or_404
+from django.shortcuts import render, get_object_or_404, redirect
 from django.core.paginator import Paginator, PageNotAnInteger, EmptyPage
 from .models import Teacher
+from .forms import ReviewForm
 
 # Create your views here.
 def teacher_list_view(request):
@@ -20,6 +21,15 @@ def teacher_list_view(request):
 
 def teacher_detail_view(request, slug):
     teacher = get_object_or_404(Teacher, slug=slug)
-    teacher_courses = teacher.courses.all()
+    student_reviews = teacher.reviews.filter(active=True).order_by('-created')
     
-    return render(request, 'teacher/teacher_detail.html', {'teacher': teacher, 'teacher_courses': teacher_courses})
+    if request.method == 'POST':
+        form = ReviewForm(request.POST)
+        if form.is_valid():
+            form.save()
+            
+            return redirect(teacher.get_absolute_url())
+    else:
+        form = ReviewForm(initial={'teacher': teacher})
+    
+    return render(request, 'teacher/teacher_detail.html', {'teacher': teacher, 'form': form, 'student_reviews': student_reviews})

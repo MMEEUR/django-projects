@@ -15,7 +15,8 @@
                     <nav aria-label="breadcrumb">
                         <ol class="breadcrumb">
                             <li class="breadcrumb-item"><a href="#">Home</a></li>
-                            <li class="breadcrumb-item active" aria-current="page">Teachers</li>
+                            <li class="breadcrumb-item" aria-current="page"><a href="{% url 'teacher:teacher_list' %}">Teachers</a></li>
+                            <li class="breadcrumb-item active" aria-current="page">{{ teacher.name }}</li>
                         </ol>
                     </nav>
                 </div> <!-- page banner cont -->
@@ -86,7 +87,7 @@
                         <div class="tab-pane fade" id="courses" role="tabpanel" aria-labelledby="courses-tab">
                             <div class="courses-cont pt-20">
                                 <div class="row">
-                                    {% for course in teacher_courses %}
+                                    {% for course in teacher.courses.all %}
                                     <div class="col-md-6">
                                         <div class="singel-course mt-30">
                                             <div class="thum">
@@ -97,15 +98,12 @@
                                                     <span>${{ course.price }}</span>
                                                 </div>
                                             </div>
-                                            <div class="cont border">
+                                            <div class="cont border product">
+                                                <p style="display: none;">{{ course.average_rating }}</p>
                                                 <ul>
-                                                    <li><i class="fa fa-star"></i></li>
-                                                    <li><i class="fa fa-star"></i></li>
-                                                    <li><i class="fa fa-star"></i></li>
-                                                    <li><i class="fa fa-star"></i></li>
-                                                    <li><i class="fa fa-star"></i></li>
+                                                    
                                                 </ul>
-                                                <span>(20 Reviws)</span>
+                                                <span>({{ course.total_rating }} Review{{ course.total_rating|pluralize }})</span>
                                                 <a href="{{ course.get_absolute_url }}"><h4>{{ course.name }}</h4></a>
                                                 <div class="course-teacher">
                                                     <div class="thum">
@@ -133,128 +131,81 @@
                                 <div class="title">
                                     <h6>Student Reviews</h6>
                                 </div>
+                                {% if not student_reviews %}
+                                <br><p>There is no review</p>
+                                {% endif %}
                                 <ul>
-                                   <li>
+                                    {% for review in student_reviews %}
+                                    <li>
                                        <div class="singel-reviews">
                                             <div class="reviews-author">
                                                 <div class="author-thum">
-                                                    <img src="images/review/r-1.jpg" alt="Reviews">
+                                                    <img width="70" height="70" src="/global/user.png" alt="Reviews">
                                                 </div>
                                                 <div class="author-name">
-                                                    <h6>Bobby Aktar</h6>
-                                                    <span>April 03, 2019</span>
+                                                    <h6>{{ review }}</h6>
+                                                    <span>{{ review.created }}</span>
                                                 </div>
                                             </div>
                                             <div class="reviews-description pt-20">
-                                                <p>There are many variations of passages of Lorem Ipsum available, but the majority have suffered alteration in some form, by injected humour, or randomised words which.</p>
-                                                <div class="rating">
+                                                <p>{{ review.comment }}</p>
+                                                <div class="rating user-rating">
+                                                    <p style="display: none;">{{ review.rating }}</p>
                                                     <ul>
-                                                        <li><i class="fa fa-star"></i></li>
-                                                        <li><i class="fa fa-star"></i></li>
-                                                        <li><i class="fa fa-star"></i></li>
-                                                        <li><i class="fa fa-star"></i></li>
-                                                        <li><i class="fa fa-star"></i></li>
+                                                        
                                                     </ul>
-                                                    <span>/ 5 Star</span>
+                                                    <span>/ {{ review.rating }} Star{{ review.rating|pluralize }}</span>
                                                 </div>
                                             </div>
                                         </div> <!-- singel reviews -->
-                                   </li>
-                                   <li>
-                                       <div class="singel-reviews">
-                                            <div class="reviews-author">
-                                                <div class="author-thum">
-                                                    <img src="images/review/r-2.jpg" alt="Reviews">
-                                                </div>
-                                                <div class="author-name">
-                                                    <h6>Humayun Ahmed</h6>
-                                                    <span>April 13, 2019</span>
-                                                </div>
-                                            </div>
-                                            <div class="reviews-description pt-20">
-                                                <p>There are many variations of passages of Lorem Ipsum available, but the majority have suffered alteration in some form, by injected humour, or randomised words which.</p>
-                                                <div class="rating">
-                                                    <ul>
-                                                        <li><i class="fa fa-star"></i></li>
-                                                        <li><i class="fa fa-star"></i></li>
-                                                        <li><i class="fa fa-star"></i></li>
-                                                        <li><i class="fa fa-star"></i></li>
-                                                        <li><i class="fa fa-star"></i></li>
-                                                    </ul>
-                                                    <span>/ 5 Star</span>
-                                                </div>
-                                            </div>
-                                        </div> <!-- singel reviews -->
-                                   </li>
-                                   <li>
-                                       <div class="singel-reviews">
-                                            <div class="reviews-author">
-                                                <div class="author-thum">
-                                                    <img src="images/review/r-3.jpg" alt="Reviews">
-                                                </div>
-                                                <div class="author-name">
-                                                    <h6>Tania Aktar</h6>
-                                                    <span>April 20, 2019</span>
-                                                </div>
-                                            </div>
-                                            <div class="reviews-description pt-20">
-                                                <p>There are many variations of passages of Lorem Ipsum available, but the majority have suffered alteration in some form, by injected humour, or randomised words which.</p>
-                                                <div class="rating">
-                                                    <ul>
-                                                        <li><i class="fa fa-star"></i></li>
-                                                        <li><i class="fa fa-star"></i></li>
-                                                        <li><i class="fa fa-star"></i></li>
-                                                        <li><i class="fa fa-star"></i></li>
-                                                        <li><i class="fa fa-star"></i></li>
-                                                    </ul>
-                                                    <span>/ 5 Star</span>
-                                                </div>
-                                            </div>
-                                        </div> <!-- singel reviews -->
-                                   </li>
+                                    </li>
+                                    {% endfor %}
                                 </ul>
                                 <div class="title pt-15">
                                     <h6>Leave A Comment</h6>
                                 </div>
                                 <div class="reviews-form">
-                                    <form action="#">
-                                            <div class="row">
-                                                <div class="col-md-6">
-                                                    <div class="form-singel">
-                                                        <input type="text" placeholder="Fast name">
-                                                    </div>
+                                    <form method="post">
+                                        {% csrf_token %}
+                                        {{ form.teacher }}
+                                        <div class="row">
+                                            <div class="col-md-6">
+                                                <div class="form-singel">
+                                                    {{ form.first_name }}
                                                 </div>
-                                                <div class="col-md-6">
-                                                    <div class="form-singel">
-                                                        <input type="text" placeholder="Last Name">
-                                                    </div>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <div class="form-singel">
+                                                    {{ form.last_name }}
                                                 </div>
-                                                <div class="col-lg-12">
-                                                    <div class="form-singel">
-                                                        <div class="rate-wrapper">
-                                                            <div class="rate-label">Your Rating:</div>
-                                                            <div class="rate">
-                                                                <div class="rate-item"><i class="fa fa-star" aria-hidden="true"></i></div>
-                                                                <div class="rate-item"><i class="fa fa-star" aria-hidden="true"></i></div>
-                                                                <div class="rate-item"><i class="fa fa-star" aria-hidden="true"></i></div>
-                                                                <div class="rate-item"><i class="fa fa-star" aria-hidden="true"></i></div>
-                                                                <div class="rate-item"><i class="fa fa-star" aria-hidden="true"></i></div>
-                                                            </div>
+                                            </div>
+                                            <div class="col-lg-12">
+                                                <div class="form-singel">
+                                                    <div class="rate-wrapper">
+                                                        {{ form.rating }}
+                                                        <div class="rate-label">Your Rating:</div>
+                                                        <div class="rate" id="rate">
+                                                            <div data-value="1" class="rate-item"><i class="fa fa-star" aria-hidden="true"></i></div>
+                                                            <div data-value="2" class="rate-item"><i class="fa fa-star" aria-hidden="true"></i></div>
+                                                            <div data-value="3" class="rate-item"><i class="fa fa-star" aria-hidden="true"></i></div>
+                                                            <div data-value="4" class="rate-item"><i class="fa fa-star" aria-hidden="true"></i></div>
+                                                            <div data-value="5" class="rate-item"><i class="fa fa-star" aria-hidden="true"></i></div>
                                                         </div>
                                                     </div>
                                                 </div>
-                                                <div class="col-lg-12">
-                                                    <div class="form-singel">
-                                                        <textarea placeholder="Comment"></textarea>
-                                                    </div>
+                                            </div>
+                                            <div class="col-lg-12">
+                                                <div class="form-singel">
+                                                    {{ form.comment }}                            
                                                 </div>
-                                                <div class="col-lg-12">
-                                                    <div class="form-singel">
-                                                        <button type="button" class="main-btn">Post Comment</button>
-                                                    </div>
+                                            </div>
+                                            <div class="col-lg-12">
+                                                <div class="form-singel">
+                                                    <button type="submit" class="main-btn">Post Comment</button>
                                                 </div>
-                                            </div> <!-- row -->
-                                        </form>
+                                            </div>
+                                        </div> <!-- row -->                                 
+                                    </form>
                                 </div>
                             </div> <!-- reviews cont -->
                         </div>
@@ -268,3 +219,66 @@
 <!--====== EVENTS PART ENDS ======-->
 
 {% endblock content %}
+
+{% block script %}
+
+<script>
+
+    let contDivs = document.querySelectorAll('.product');
+    let contDivs2 = document.querySelectorAll('.user-rating');
+
+    contDivs.forEach(div => {
+      let averageRating = div.querySelector('p').textContent;
+      let ul = div.querySelector('ul');
+    
+      for (let i = 0; i <= 4; i++) {
+        let li = document.createElement('li');
+        let icon = document.createElement('i');
+    
+        if (averageRating > i) {
+          if (averageRating - i >= 1) {
+            icon.className = 'fa fa-star';
+          } else {
+            icon.className = 'fa fa-star-half-o';
+          }
+    
+        } else {
+          icon.className = 'fa fa-star-o';
+        }
+    
+        li.appendChild(icon);
+        ul.appendChild(li);
+    
+      }
+    });
+
+    contDivs2.forEach(div => {
+        let averageRating = div.querySelector('p').textContent;
+        let ul = div.querySelector('ul');
+      
+        for (let i = 0; i < 5; i++) {
+          let li = document.createElement('li');
+          let icon = document.createElement('i');
+      
+          if (averageRating > i) {
+            if (averageRating - i >= 1) {
+              icon.className = 'fa fa-star';
+            }
+          } else {
+            icon.className = 'fa fa-star-o';
+          }
+      
+          li.appendChild(icon);
+          ul.appendChild(li);  
+        }
+      });
+  
+    $('.rate-item').on('click', function(){
+          var value = $(this).data('value');
+          console.log(value);
+          $('#id_rating').val(value)
+    });
+
+</script>
+
+{% endblock script %}

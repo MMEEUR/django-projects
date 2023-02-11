@@ -138,15 +138,10 @@
                             <div class="collapse navbar-collapse sub-menu-bar" id="navbarSupportedContent">
                                 <ul class="navbar-nav mr-auto">
                                     <li class="nav-item">
-                                        <a class="active" href="#">Home</a>
-                                        <!--<ul class="sub-menu">
-                                            <li><a class="active" href="index-2.html">Home 01</a></li>
-                                            <li><a href="index-3.html">Home 02</a></li>
-                                            <li><a href="index-4.html">Home 03</a></li>
-                                        </ul>-->
+                                        <a href="#">Home</a>
                                     </li>
                                     <li class="nav-item">
-                                        <a href="#">About us</a>
+                                        <a href="{% url 'about:about_us' %}">About us</a>
                                     </li>
                                     <li class="nav-item">
                                         <a href="{% url 'shop:product_list' %}">Courses</a>
@@ -164,10 +159,6 @@
                                     </li>
                                     <li class="nav-item">
                                         <a href="{% url 'teacher:teacher_list' %}">Our teachers</a>
-                                        <!-- <ul class="sub-menu">
-                                            <li><a href="teachers.html">teachers</a></li>
-                                            <li><a href="teachers-singel.html">teacher Singel</a></li>
-                                        </ul> -->
                                     </li>
                                     <li class="nav-item">
                                         <a href="#">Blog</a>
@@ -178,10 +169,6 @@
                                     </li>
                                     <li class="nav-item">
                                         <a href="#">Contact</a>
-                                        <!-- <ul class="sub-menu">
-                                            <li><a href="contact.html">Contact Us</a></li>
-                                            <li><a href="contact-2.html">Contact Us 2</a></li>
-                                        </ul> -->
                                     </li>
                                 </ul>
                             </div>
@@ -190,7 +177,6 @@
                     <div class="col-lg-2 col-md-2 col-sm-3 col-4">
                         <div class="right-icon text-right">
                             <ul>
-                                <li><a href="#" id="search"><i class="fa fa-search"></i></a></li>
                                 <li><a href="#"><i class="fa fa-shopping-bag"></i><span>0</span></a></li>
                             </ul>
                         </div> <!-- right icon -->
@@ -251,7 +237,7 @@
                             </div>
                             <ul>
                                 <li><a href="#"><i class="fa fa-angle-right"></i>Home</a></li>
-                                <li><a href="#"><i class="fa fa-angle-right"></i>About us</a></li>
+                                <li><a href="{% url 'about:about_us' %}"><i class="fa fa-angle-right"></i>About us</a></li>
                                 <li><a href="{% url 'shop:product_list' %}"><i class="fa fa-angle-right"></i>Courses</a></li>
                                 <li><a href="#"><i class="fa fa-angle-right"></i>News</a></li>
                                 <li><a href="#"><i class="fa fa-angle-right"></i>Event</a></li>
@@ -381,6 +367,18 @@
     <script src="{% static 'js/map-script.js' %}"></script>
 
     <!--====== Custom js ======-->
+    <script>
+
+        const navLinks = document.querySelectorAll('.nav-item a');
+        const currentUrl = document.location.href;
+        
+        navLinks.forEach(link => {
+          if (link.href === currentUrl) {
+            link.classList.add('active');
+          }
+        });
+
+    </script>
     {% block script %}{% endblock script %}
 
 </body>

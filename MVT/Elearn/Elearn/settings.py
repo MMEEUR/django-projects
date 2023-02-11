@@ -42,6 +42,7 @@ INSTALLED_APPS = [
     'cart.apps.CartConfig',
     'teacher.apps.TeacherConfig',
     'about.apps.AboutConfig',
+    'blog.apps.BlogConfig',
     'widget_tweaks',
 ]
 

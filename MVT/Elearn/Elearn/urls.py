@@ -23,4 +23,5 @@ urlpatterns = [
     path('courses/', include('shop.urls', namespace='shop')),
     path('cart/', include('cart.urls', namespace='cart')),
     path('teachers/', include('teacher.urls', namespace='teacher')),
+    path('about_us/', include('about.urls', namespace='about')),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

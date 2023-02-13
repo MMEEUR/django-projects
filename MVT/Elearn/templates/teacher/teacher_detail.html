@@ -201,7 +201,7 @@
                                             </div>
                                             <div class="col-lg-12">
                                                 <div class="form-singel">
-                                                    <button type="submit" class="main-btn">Post Comment</button>
+                                                    <button id="submit" type="submit" class="main-btn">Post Comment</button>
                                                 </div>
                                             </div>
                                         </div> <!-- row -->                                 
@@ -272,10 +272,14 @@
           ul.appendChild(li);  
         }
       });
+
+    $( document ).ready(function() {
+        $('#submit').prop('disabled', true);
+    });
   
     $('.rate-item').on('click', function(){
           var value = $(this).data('value');
-          console.log(value);
+          $('#submit').removeAttr('disabled');
           $('#id_rating').val(value)
     });
 

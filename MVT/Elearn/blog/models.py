@@ -37,13 +37,14 @@ class Post(models.Model):
         return self.title
     
     def comments_count(self):
-        return self.comments.count()
+        return self.comments.filter(active=True).count()
     
     def get_absolute_url(self):
         return reverse("blog:post_detail", args=[self.id])
 
 class Comment(models.Model):
     post = models.ForeignKey(Post, on_delete=models.CASCADE, related_name='comments')
+    parent = models.ForeignKey('self', null=True, blank=True, on_delete=models.CASCADE, related_name='replies')
     author = models.CharField(max_length=100)
     text = models.TextField()
     email = models.EmailField()
@@ -54,18 +55,4 @@ class Comment(models.Model):
         ordering = ('-created_at',)
     
     def __str__(self):
-        return self.text
-    
-class Reply(models.Model):
-    comment = models.ForeignKey(Comment, on_delete=models.CASCADE, related_name='replies')
-    author = models.CharField(max_length=100)
-    text = models.TextField()
-    email = models.EmailField()
-    created_at = models.DateTimeField(auto_now_add=True)
-    active = models.BooleanField(default=False)
-    
-    class Meta:
-        ordering = ('-created_at',)
-    
-    def __str__(self):
-        return self.text
+        return f'{self.id}. {self.text}'

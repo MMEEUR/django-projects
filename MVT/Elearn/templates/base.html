@@ -161,7 +161,7 @@
                                         <a href="{% url 'teacher:teacher_list' %}">Our teachers</a>
                                     </li>
                                     <li class="nav-item">
-                                        <a href="#">Blog</a>
+                                        <a href="{% url 'blog:post_list' %}">Blog</a>
                                         <!-- <ul class="sub-menu">
                                             <li><a href="blog.html">Blog</a></li>
                                             <li><a href="blog-singel.html">Blog Singel</a></li>
@@ -243,7 +243,7 @@
                                 <li><a href="#"><i class="fa fa-angle-right"></i>Event</a></li>
                             </ul>
                             <ul>
-                                <li><a href="#"><i class="fa fa-angle-right"></i>Gallery</a></li>
+                                <li><a href="{% url 'blog:post_list' %}"><i class="fa fa-angle-right"></i>Blog</a></li>
                                 <li><a href="{% url 'teacher:teacher_list' %}"><i class="fa fa-angle-right"></i>Teachers</a></li>
                                 <li><a href="#"><i class="fa fa-angle-right"></i>Support</a></li>
                                 <li><a href="#"><i class="fa fa-angle-right"></i>Contact</a></li>

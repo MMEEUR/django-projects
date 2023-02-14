@@ -1,8 +1,8 @@
 from django.shortcuts import render, redirect, get_object_or_404
 from django.core.paginator import Paginator, PageNotAnInteger, EmptyPage
 from django.db.models import Sum
-from .models import Post, Category
-from .forms import CommentForm, ReplyForm
+from .models import Post, Category, Comment
+from .forms import CommentForm
 
 def post_list_view(request, cat_slug=None):
     object_list = Post.objects.filter(active=True)
@@ -36,34 +36,44 @@ def post_list_view(request, cat_slug=None):
 def post_detail_view(request, post_id):
     post = get_object_or_404(Post, id=post_id)
     comments = post.comments.filter(active=True)
+    categories = Category.objects.all()
     popular_posts = Post.objects.annotate(comment_sum=Sum('comments__replies__id')).order_by('-comment_sum')[:3]
     
     if request.method == 'POST':
         comment_form = CommentForm(data=request.POST)
-        reply_form = ReplyForm(data=request.POST)
         
         if comment_form.is_valid():
-            new_comment = comment_form.save(commit=False)
-            new_comment.post = post
-            new_comment.save()
+            parent_obj = None
             
-            return redirect(post.get_absolute_url())
-        
-        elif reply_form.is_valid():
-            new_reply = reply_form.save(commit=False)
-            new_reply.save()
+            try:
+                parent_id = int(request.POST.get('parent_id'))
+            except:
+                parent_id = None
+                
+            if parent_id:
+                parent_obj = Comment.objects.get(id=parent_id)
+                
+                if parent_obj:
+                    replay_comment = comment_form.save(commit=False)
+                    replay_comment.parent = parent_obj
+                    replay_comment.post = post
+                    replay_comment.save()
+                    
+            else:
+                new_comment = comment_form.save(commit=False)
+                new_comment.post = post
+                new_comment.save()
             
             return redirect(post.get_absolute_url())
     else:
         comment_form = CommentForm()
-        reply_form = ReplyForm()
         
     context = {
         'post': post,
         'popular_posts': popular_posts,
+        'categories': categories,
         'comments': comments,
         'comment_form': comment_form,
-        'reply_form': reply_form,
     }    
     
     return render(request, 'blog/post_detail.html', context=context)

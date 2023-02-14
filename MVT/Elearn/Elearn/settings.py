@@ -43,6 +43,7 @@ INSTALLED_APPS = [
     'teacher.apps.TeacherConfig',
     'about.apps.AboutConfig',
     'blog.apps.BlogConfig',
+    'contact.apps.ContactConfig',
     'widget_tweaks',
 ]
 

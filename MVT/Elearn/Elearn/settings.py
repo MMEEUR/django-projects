@@ -44,6 +44,7 @@ INSTALLED_APPS = [
     'about.apps.AboutConfig',
     'blog.apps.BlogConfig',
     'contact.apps.ContactConfig',
+    'events.apps.EventsConfig',
     'widget_tweaks',
 ]
 

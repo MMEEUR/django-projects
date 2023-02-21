@@ -139,7 +139,14 @@
                                 </a>
                             </td>
                             <td>{{ p.name }}</td>
-                            <td>{{ item.quantity }}</td>
+                            <td>
+                                <form method="post" action="{% url 'cart:cart_add' p.id %}">
+                                    {% csrf_token %}
+                                    {{ item.update_quantity_form.quantity }}
+                                    {{ item.update_quantity_form.override }}
+                                    <input type="submit" value="update">
+                                </form>
+                            </td>
                             <td>
                                 <form method="post" action="{% url 'cart:cart_remove' p.id %}">
                                     {% csrf_token %}

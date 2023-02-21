@@ -146,15 +146,15 @@
                                     <input type="submit" value="Remove">
                                 </form>
                             </td>
-                            <td class="num">{{ item.price }}</td>
-                            <td class="num">{{ item.total_price }}</td>
+                            <td class="num">${{ item.price }}</td>
+                            <td class="num">${{ item.total_price }}</td>
                         </tr>
                         {% endwith %}
                         {% endfor %}
                         <tr>
                             <td>Total</td>
                             <td colspan="4"></td>
-                            <td class="num">{{ cart.get_total_price }}</td>
+                            <td class="num">${{ cart.get_total_price }}</td>
                         </tr>
                     </tbody>
                 </table>

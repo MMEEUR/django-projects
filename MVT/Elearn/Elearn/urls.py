@@ -27,4 +27,5 @@ urlpatterns = [
     path('blog/', include('blog.urls', namespace='blog')),
     path('contact/', include('contact.urls', namespace='contact')),
     path('events/', include('events.urls', namespace='events')),
+    path('orders/', include('orders.urls', namespace='orders')),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

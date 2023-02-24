@@ -46,6 +46,7 @@ INSTALLED_APPS = [
     'contact.apps.ContactConfig',
     'events.apps.EventsConfig',
     'orders.apps.OrdersConfig',
+    'coupons.apps.CouponsConfig',
     'widget_tweaks',
 ]
 

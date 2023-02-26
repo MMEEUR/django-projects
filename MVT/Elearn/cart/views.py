@@ -2,6 +2,7 @@ from django.shortcuts import render, get_object_or_404, redirect
 from django.views.decorators.http import require_POST
 from shop.models import Product
 from .forms import CartAddForm
+from coupons.forms import CouponApplyForm
 from .cart import Cart
 
 # Create your views here.
@@ -27,7 +28,8 @@ def remove_from_cart(request, product_id):
 
 def cart_detail(request):
     cart = Cart(request)
+    form = CouponApplyForm()
     for item in cart:
         item['update_quantity_form'] = CartAddForm(initial={'quantity': item['quantity'], 'override': True})
     
-    return render(request, 'cart/cart_detail.html', {'cart': cart})
+    return render(request, 'cart/cart_detail.html', {'cart': cart, 'form': form})

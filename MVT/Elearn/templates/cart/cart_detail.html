@@ -3,84 +3,137 @@
 {% block style %}
 
 <style type="text/css">
-    /* Style for the Cart Table */
+  /* Style for the Cart Table */
 
-    .cart {
-      width: 100%;
-      border-collapse: collapse;
-      margin-bottom: 20px;
-    }
-
-    .cart thead tr {
-      background-color: #f5f5f5;
-    }
-
-    .cart th, .cart td {
-      padding: 10px;
-      text-align: left;
-      vertical-align: middle;
-      border: 1px solid #ddd;
-    }
-
-    .cart td {
-      font-size: 14px;
-    }
-
-    .cart td.num {
-      text-align: right;
-    }
-
-    .cart tbody tr:nth-child(even) {
-      background-color: #f9f9f9;
-    }
-
-    .cart tbody tr:hover {
-      background-color: #f5f5f5;
-    }
-
-    .cart input[type="submit"] {
-      background-color: #ff4d4d;
-      color: #fff;
-      border: none;
-      padding: 5px 10px;
-      cursor: pointer;
-      transition: background-color 0.3s ease;
-    }
-
-    .cart input[type="submit"]:hover {
-      background-color: #ff6666;
-    }
-
-    /* Style for the Buttons */
-
-    .btn1 {
-      background-color: #ff4d4d;
-      color: #fff;
-      border: none;
-      padding: 10px 20px;
-      text-decoration: none;
-      cursor: pointer;
-      transition: background-color 0.3s ease;
-      margin-left: 10px;
-    }
-
-    .btn1:hover {
-      background-color: #ff6666;
-    }
-
-    .buttonlight {
-      background-color: #f5f5f5;
-      color: #444;
-      border: none;
-      padding: 10px 20px;
-      text-decoration: none;
-      cursor: pointer;
-      transition: background-color 0.3s ease;
-    }
-
-    .buttonlight:hover {
-      background-color: #ddd;
-    }
+  .cart {
+    width: 100%;
+    border-collapse: collapse;
+    margin-bottom: 20px;
+  }
+  
+  .cart thead tr {
+    background-color: #f5f5f5;
+  }
+  
+  .cart th, .cart td {
+    padding: 10px;
+    text-align: left;
+    vertical-align: middle;
+    border: 1px solid #ddd;
+  }
+  
+  .cart td {
+    font-size: 14px;
+  }
+  
+  .cart td.num {
+    text-align: right;
+  }
+  
+  .cart tbody tr:nth-child(even) {
+    background-color: #f9f9f9;
+  }
+  
+  .cart tbody tr:hover {
+    background-color: #f5f5f5;
+  }
+  
+  .cart input[type="submit"] {
+    background-color: #ff4d4d;
+    color: #fff;
+    border: none;
+    padding: 5px 10px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+  }
+  
+  .cart input[type="submit"]:hover {
+    background-color: #ff6666;
+  }
+  
+  /* Style for the Buttons */
+  
+  .btn1 {
+    background-color: #ff4d4d;
+    color: #fff;
+    border: none;
+    padding: 10px 20px;
+    text-decoration: none;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    margin-left: 10px;
+  }
+  
+  .btn1:hover {
+    background-color: #ff6666;
+  }
+  
+  .buttonlight {
+    background-color: #f5f5f5;
+    color: #444;
+    border: none;
+    padding: 10px 20px;
+    text-decoration: none;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+  }
+  
+  .buttonlight:hover {
+    background-color: #ddd;
+  }
+  
+  /* Style for the Coupon Form */
+  
+  #coupon-form {
+    margin-top: 20px;
+  }
+  
+  #coupon-form label {
+    display: inline-block;
+    margin-right: 10px;
+    font-size: 14px;
+  }
+  
+  #coupon-form input[type="text"] {
+    width: 200px;
+    padding: 5px;
+    font-size: 14px;
+    border: 1px solid #ddd;
+  }
+  
+  #coupon-form input[type="submit"] {
+    background-color: #ff4d4d;
+    color: #fff;
+    border: none;
+    padding: 5px 10px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+  }
+  
+  #coupon-form input[type="submit"]:hover {
+    background-color: #ff6666;
+  }
+  
+  /* Style for the Checkout Buttons */
+  
+  .checkout-btns {
+    margin-top: 20px;
+    text-align: right;
+  }
+  
+  .checkout-btns a {
+    background-color: #ff4d4d;
+    color: #fff;
+    border: none;
+    padding: 10px 20px;
+    text-decoration: none;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+  }
+  
+  .checkout-btns a:hover {
+    background-color: #ff6666;
+  }
 </style>
 
 {% endblock style %}
@@ -158,17 +211,40 @@
                         </tr>
                         {% endwith %}
                         {% endfor %}
+                        {% if cart.coupon %}
                         <tr>
-                            <td>Total</td>
+                            <td>SubTotal</td>
                             <td colspan="4"></td>
-                            <td class="num">${{ cart.get_total_price }}</td>
+                            <td class="num">${{ cart.get_total_price|floatformat:0 }}</td>
+                          </tr>
+                        <tr>
+                          <td>
+                            {{ cart.coupon.code }} coupon
+                            {{ cart.coupon.discount }}% off
+                          </td>
+                          <td colspan="4"></td>
+                          <td class="num">- ${{ cart.get_discount|floatformat:0 }}</td>
+                        </tr>
+                        {% endif %}
+                        <tr>
+                            <td><strong>Total</strong></td>
+                            <td colspan="4"></td>
+                            <td class="num">${{ cart.get_total_price_after_discount|floatformat:0 }}</td>
                         </tr>
                     </tbody>
                 </table>
-                <p class="text-right">
-                    <a href="{% url 'shop:product_list' %}" class="buttonlight">Back To Courses</a>
-                    <a href="{% url 'orders:create' %}" class="button btn1">Checkout</a>
-                </p>
+                <div>
+                  <form id="coupon-form" method="post" action="{% url 'coupons:apply' %}">
+                      {% csrf_token %}
+                      {{ form.code }}
+                      <input type="submit" value="Apply">
+                  </form>
+                  <br>
+                  <p class="text-right checkout-btns">
+                      <a href="{% url 'shop:product_list' %}" class="buttonlight">Back To Courses</a>
+                      <a href="{% url 'orders:create' %}" class="button btn1">Checkout</a>
+                  </p>
+                </div>
             </div> <!-- row -->
         </div>
     </div> <!-- container -->

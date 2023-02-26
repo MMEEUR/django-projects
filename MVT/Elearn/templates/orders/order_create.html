@@ -129,12 +129,18 @@
                         {% for item in cart %}
                         <li>
                             {{ item.quantity }} x {{ item.product }}
-                            <span>${{ item.total_price }}</span>
+                            <span>${{ item.total_price|floatformat:0 }}</span>
                         </li>
                         {% endfor %}
+                        {% if cart.coupon %}
+                        <li>
+                            "{{ cart.coupon.code }}" {{ cart.coupon.discount }}% off
+                            <span>- ${{ cart.get_discount|floatformat:0 }}</span>
+                        </li>
+                        {% endif %}
                     </ul>
                     <hr>
-                    <p>Total: ${{ cart.get_total_price }}</p>
+                    <p>Total: ${{ cart.get_total_price_after_discount|floatformat:0 }}</p>
                 </div>
                 <div class="left">
                 <form method="post" class="order-form">

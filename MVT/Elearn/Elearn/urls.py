@@ -20,12 +20,13 @@ from django.conf import settings
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('courses/', include('shop.urls', namespace='shop')),
     path('cart/', include('cart.urls', namespace='cart')),
+    path('courses/', include('shop.urls', namespace='shop')),
     path('teachers/', include('teacher.urls', namespace='teacher')),
     path('about_us/', include('about.urls', namespace='about')),
     path('blog/', include('blog.urls', namespace='blog')),
     path('contact/', include('contact.urls', namespace='contact')),
     path('events/', include('events.urls', namespace='events')),
     path('orders/', include('orders.urls', namespace='orders')),
+    path('coupons/', include('coupons.urls', namespace='coupons')),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
